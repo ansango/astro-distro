@@ -14,8 +14,9 @@ const { command, root, projects } = config.sections.projects;
 </div>
 
 <script>
-  const items =
-    document.querySelectorAll<HTMLButtonElement>("[data-tree-item]");
+  const items = document.querySelectorAll<HTMLButtonElement>(
+    "button[data-tree-item]",
+  );
   const details = document.querySelectorAll<HTMLElement>("[data-detail]");
 
   function select(idx: number) {
