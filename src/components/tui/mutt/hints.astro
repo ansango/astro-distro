@@ -1,0 +1,22 @@
+---
+export interface Props {
+  hints?: { key: string; action: string }[];
+}
+
+const {
+  hints = [
+    { key: "j/k", action: "next" },
+    { key: "enter", action: "open" },
+    { key: "q", action: "quit" },
+  ],
+} = Astro.props as Props;
+---
+
+<div class="mt-2 text-[0.8rem] text-dim">
+  {hints.map(({ key, action }, i) => (
+    <span>
+      {i > 0 && " · "}
+      <span class="text-accent">{key}</span> {action}
+    </span>
+  ))}
+</div>

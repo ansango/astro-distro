@@ -1,0 +1,32 @@
+---
+import Label from "../commons/label.astro";
+import Container from "../commons/container.astro";
+import Content from "../commons/content.astro";
+
+export interface Props {
+  device?: string;
+  ram?: string;
+  os?: string;
+}
+
+const {
+  device = "thinkpad x1 carbon gen 11",
+  ram = "32gb ram",
+  os = "arch linux",
+} = Astro.props as Props;
+---
+
+<Container>
+  <Label>hardware</Label>
+  <Content>
+    <div
+      class="font-mono grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-x-2"
+    >
+      <span>{device}</span>
+      <span class="text-dim">·</span>
+      <span>{ram}</span>
+      <span class="text-dim">·</span>
+      <span class="text-accent">{os}</span>
+    </div>
+  </Content>
+</Container>

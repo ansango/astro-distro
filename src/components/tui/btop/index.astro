@@ -1,0 +1,13 @@
+---
+import Prompt from "../commons/prompt.astro";
+import Cpu from "./cpu.astro";
+import Mem from "./mem.astro";
+import Hardware from "./hardware.astro";
+---
+
+<Prompt cmd="btop --view stack — daily usage && hardware" class="mb-5" />
+<div class="my-2 flex flex-col gap-5">
+  <Cpu />
+  <Mem />
+  <Hardware />
+</div>

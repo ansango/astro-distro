@@ -1,0 +1,37 @@
+---
+export interface Mail {
+  selected?: boolean;
+  from: string;
+  subject: string;
+  date: string;
+}
+
+export interface Props {
+  mails?: Mail[];
+}
+
+const {
+  mails = [
+    { selected: true, from: "github.com", subject: "/ansango", date: "15 Aug 2014" },
+    { from: "twitter.com", subject: "@ansango", date: "22 Mar 2015" },
+    { from: "ansango.dev", subject: "hola@ansango.dev", date: "10 Jan 2019" },
+  ],
+} = Astro.props as Props;
+---
+
+<div
+  class="font-mono my-2 grid grid-cols-[1.5ch_14ch_1fr_12ch] gap-x-4 text-[0.82rem] leading-[1.6]"
+>
+  <span></span>
+  <span class="text-dim">From</span>
+  <span class="text-dim">Subject</span>
+  <span class="text-dim">Date</span>
+  {mails.map(({ selected, from, subject, date }) => (
+    <Fragment>
+      <span class="font-medium text-accent">{selected ? ">" : " "}</span>
+      <span>{from}</span>
+      <span>{subject}</span>
+      <span class="text-dim">{date}</span>
+    </Fragment>
+  ))}
+</div>

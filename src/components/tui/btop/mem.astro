@@ -1,0 +1,40 @@
+---
+import Label from "../commons/label.astro";
+import Container from "../commons/container.astro";
+import Content from "../commons/content.astro";
+
+export interface Props {
+  mem?: {
+    used: number;
+    total: number;
+    theme: string;
+    themePercent: number;
+  };
+}
+
+const {
+  mem = { used: 8.2, total: 32, theme: "catppuccin", themePercent: 100 },
+} = Astro.props as Props;
+
+const BAR_WIDTH = 28;
+const bar = (percent: number) => {
+  const filled = Math.round((percent / 100) * BAR_WIDTH);
+  return "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled);
+};
+
+const usedPercent = (mem.used / mem.total) * 100;
+---
+
+<Container>
+  <Label>MEM</Label>
+  <Content>
+    <div
+      class="font-mono grid grid-cols-[12ch_1fr_auto_auto] items-center gap-x-3"
+    >
+      <span>RAM</span>
+      <span class="text-accent">{bar(usedPercent)}</span>
+      <span>{mem.used}/{mem.total} GB</span>
+      <span class="text-accent">{mem.theme} {mem.themePercent}%</span>
+    </div>
+  </Content>
+</Container>

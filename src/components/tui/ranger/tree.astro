@@ -1,0 +1,35 @@
+---
+import Label from "../commons/label.astro";
+import Container from "../commons/container.astro";
+
+export interface Props {
+  /** directorio raíz mostrado en el árbol */
+  root?: string;
+  /** proyectos listados en el árbol */
+  projects?: { name: string; size: string; date: string }[];
+}
+
+const {
+  root = "/home/ansango",
+  projects = [
+    { name: "project.alpha", size: "  4.0K", date: "Jan 15" },
+    { name: "project.beta", size: "  4.0K", date: "Feb 20" },
+    { name: "project.gamma", size: "  4.0K", date: "Mar 10" },
+    { name: "project.delta", size: "  4.0K", date: "Apr 05" },
+  ],
+} = Astro.props as Props;
+---
+
+<Container>
+  <Label>tree</Label>
+  <pre
+    class="m-0 overflow-x-auto p-4 text-[0.82rem] leading-[1.55] whitespace-pre"
+  >
+<span class="text-dim">{root}</span>
+└── projects/  <span class="text-dim">(4 items, 96K total)</span>
+    ├── <span class="text-accent">{projects[0].name}</span> <span class="text-dim">{projects[0].size}</span> <span class="text-dim">{projects[0].date}</span>
+    ├── {projects[1].name}    <span class="text-dim">{projects[1].size}</span> <span class="text-dim">{projects[1].date}</span>
+    ├── {projects[2].name}   <span class="text-dim">{projects[2].size}</span> <span class="text-dim">{projects[2].date}</span>
+    └── {projects[3].name}   <span class="text-dim">{projects[3].size}</span> <span class="text-dim">{projects[3].date}</span>
+  </pre>
+</Container>

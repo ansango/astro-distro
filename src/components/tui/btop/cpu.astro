@@ -1,0 +1,53 @@
+---
+import Label from "../commons/label.astro";
+import Container from "../commons/container.astro";
+import Content from "../commons/content.astro";
+
+export interface Props {
+  usage?: {
+    label: string;
+    percent: number;
+    detail: string;
+    note?: string;
+  }[];
+}
+
+const {
+  usage = [
+    { label: "editor", percent: 100, detail: "neovim 0.9.5", note: "(lazyvim distro)" },
+    { label: "terminal", percent: 60, detail: "kitty + zellij 0.39.1" },
+    { label: "shell", percent: 50, detail: "zsh + oh-my-zsh + starship" },
+    { label: "cli tools", percent: 50, detail: "fzf · ripgrep · fd · bat · eza" },
+    { label: "browser", percent: 20, detail: "firefox developer edition" },
+    { label: "notes", percent: 10, detail: "obsidian", note: "(syncthing)" },
+    { label: "music", percent: 10, detail: "spotify + spicetify" },
+    { label: "theme", percent: 50, detail: "catppuccin mocha" },
+    { label: "font", percent: 40, detail: "jetbrains mono" },
+  ],
+} = Astro.props as Props;
+
+const BAR_WIDTH = 20;
+const bar = (percent: number) => {
+  const filled = Math.round((percent / 100) * BAR_WIDTH);
+  return "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled);
+};
+---
+
+<Container>
+  <Label>CPU [daily usage]</Label>
+  <Content>
+    <div
+      class="font-mono grid grid-cols-[12ch_20ch_5ch_1fr_auto] items-center gap-x-3 gap-y-1"
+    >
+      {usage.map(({ label, percent, detail, note }) => (
+        <Fragment>
+          <span>{label.padEnd(10)}</span>
+          <span class="text-accent">{bar(percent)}</span>
+          <span class="text-dim">{percent}%</span>
+          <span>{detail}</span>
+          {note ? <span class="text-dim">{note}</span> : <span />}
+        </Fragment>
+      ))}
+    </div>
+  </Content>
+</Container>
