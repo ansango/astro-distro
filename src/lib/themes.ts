@@ -12,7 +12,7 @@ export const systems = config.systems;
 export type System = (typeof systems)[number];
 export type Theme = System["slug"];
 
-export const themes: Theme[] = systems.map((distro) => distro.slug);
+export const themes: Theme[] = systems.map((distro) => distro.slug).sort();
 
 export const DEFAULT_THEME: Theme = "arch";
 

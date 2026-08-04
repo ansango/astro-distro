@@ -31,3 +31,30 @@
 	--text-2xs: 0.625rem;
 	--text-3xs: 0.5rem;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Scrollbars tematizadas. Las variables se resuelven en cada
+   `[data-theme]` (definidas en `default.astro`), así que el
+   thumb se repinta automáticamente al cambiar de distro.
+   ───────────────────────────────────────────────────────────── */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--color-border);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-dim);
+}
