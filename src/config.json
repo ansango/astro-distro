@@ -1,0 +1,46 @@
+{
+  "current": {
+    "host": "ThinkPad X1 Carbon Gen 11",
+    "uptime": "1 day, 2 hours, 30 minutes",
+    "resolution": "3840x2400",
+    "kernel": "6.7.4-arch1-1",
+    "shell": "zsh 5.9",
+    "de": "N/A",
+    "wm": "i3",
+    "theme": "catppuccin-mocha",
+    "terminal": "kitty + zellij",
+    "cpu": "Intel i7-1165G7 (8) @ 4.7GHz",
+    "gpu": "Intel Iris Xe",
+    "memory": "8421MiB / 32128MiB",
+    "font": "Iosevka Term 14"
+  },
+
+  "systems": [
+    { "slug": "arch", "os": "Arch Linux (rolling)", "pkg": "pacman", "kernel": "6.16.4-arch1-1", "shell": "zsh", "de": "hyprland", "wm": "hyprland", "theme": "catppuccin-mocha", "terminal": "kitty", "init": "systemd", "pkgs": "1487", "font": "Iosevka Term" },
+    { "slug": "archcraft", "os": "EndeavourOS Artemis", "pkg": "pacman", "kernel": "6.16.4-arch1-1", "shell": "zsh", "de": "kde-plasma", "wm": "kwin", "theme": "catppuccin-mocha", "terminal": "alacritty", "init": "systemd", "pkgs": "1245", "font": "JetBrains Mono" },
+    { "slug": "debian", "os": "Debian 13 (trixie)", "pkg": "apt", "kernel": "6.12.0-13-amd64", "shell": "bash", "de": "gnome", "wm": "mutter", "theme": "catppuccin-mocha", "terminal": "gnome-terminal", "init": "systemd", "pkgs": "2318", "font": "DejaVu Sans Mono" },
+    { "slug": "ubuntu", "os": "Ubuntu 26.04 LTS", "pkg": "apt", "kernel": "6.12.0-26-generic", "shell": "bash", "de": "gnome", "wm": "mutter", "theme": "yaru-dark", "terminal": "gnome-terminal", "init": "systemd", "pkgs": "2543", "font": "Ubuntu Mono" },
+    { "slug": "linuxmint", "os": "Linux Mint 22.3 (Zara)", "pkg": "apt", "kernel": "6.12.0-26-generic", "shell": "bash", "de": "cinnamon", "wm": "muffin", "theme": "mint-y-dark", "terminal": "gnome-terminal", "init": "systemd", "pkgs": "2891", "font": "Monospace" },
+    { "slug": "kali", "os": "Kali Linux (rolling)", "pkg": "apt", "kernel": "6.16.4-kali1-amd64", "shell": "zsh", "de": "xfce", "wm": "xfwm4", "theme": "kali-dark", "terminal": "qterminal", "init": "systemd", "pkgs": "3247", "font": "Hack" },
+    { "slug": "fedora", "os": "Fedora 43", "pkg": "dnf", "kernel": "6.16.4-200.fc43.x86_64", "shell": "bash", "de": "gnome", "wm": "mutter", "theme": "catppuccin-mocha", "terminal": "gnome-terminal", "init": "systemd", "pkgs": "2418", "font": "DejaVu Sans Mono" },
+    { "slug": "opensuse", "os": "openSUSE Tumbleweed", "pkg": "zypper", "kernel": "6.16.4-1-default", "shell": "bash", "de": "kde-plasma", "wm": "kwin", "theme": "breeze-dark", "terminal": "konsole", "init": "systemd", "pkgs": "3102", "font": "Liberation Mono" },
+    { "slug": "alpine", "os": "Alpine Linux 3.22", "pkg": "apk", "kernel": "6.12.22-lts", "shell": "ash", "de": "xfce", "wm": "xfwm4", "theme": "adwaita-dark", "terminal": "foot", "init": "openrc", "pkgs": "412", "font": "Monospace" },
+    { "slug": "gentoo", "os": "Gentoo Linux (rolling)", "pkg": "emerge", "kernel": "6.16.4-gentoo", "shell": "bash", "de": "sway", "wm": "sway", "theme": "catppuccin-mocha", "terminal": "kitty", "init": "systemd", "pkgs": "982", "font": "Hack" },
+    { "slug": "manjaro", "os": "Manjaro 25.0", "pkg": "pacman", "kernel": "6.12.22-1-MANJARO", "shell": "zsh", "de": "kde-plasma", "wm": "kwin", "theme": "matcha", "terminal": "konsole", "init": "systemd", "pkgs": "2654", "font": "Noto Sans Mono" },
+    { "slug": "centos", "os": "CentOS Stream 10", "pkg": "dnf", "kernel": "6.12.0-55.el10.x86_64", "shell": "bash", "de": "gnome", "wm": "mutter", "theme": "adwaita-dark", "terminal": "gnome-terminal", "init": "systemd", "pkgs": "1623", "font": "DejaVu Sans Mono" },
+    { "slug": "void", "os": "Void Linux (rolling)", "pkg": "xbps", "kernel": "6.16.4_1", "shell": "bash", "de": "xfce", "wm": "xfwm4", "theme": "catppuccin-mocha", "terminal": "xfce4-terminal", "init": "runit", "pkgs": "1078", "font": "Monospace" },
+    { "slug": "nixos", "os": "NixOS 25.11", "pkg": "nix", "kernel": "6.12.22-nixos", "shell": "bash", "de": "hyprland", "wm": "hyprland", "theme": "catppuccin-mocha", "terminal": "kitty", "init": "systemd", "pkgs": "1587", "font": "Iosevka Term" },
+    { "slug": "slackware", "os": "Slackware 16.0", "pkg": "slackpkg", "kernel": "6.12.22-smp", "shell": "bash", "de": "kde-plasma", "wm": "kwin", "theme": "breeze-dark", "terminal": "konsole", "init": "rc", "pkgs": "982", "font": "Monospace" },
+    { "slug": "pop", "os": "Pop!_OS 24.04 LTS (COSMIC)", "pkg": "apt", "kernel": "6.12.0-26-generic", "shell": "bash", "de": "cosmic", "wm": "cosmic-comp", "theme": "catppuccin-mocha", "terminal": "cosmic-term", "init": "systemd", "pkgs": "2491", "font": "Cantarell" },
+    { "slug": "elementary", "os": "elementary OS 9", "pkg": "apt", "kernel": "6.12.0-26-generic", "shell": "bash", "de": "pantheon", "wm": "gala", "theme": "catppuccin-mocha", "terminal": "pantheon-terminal", "init": "systemd", "pkgs": "1487", "font": "Inter" },
+    { "slug": "cachyos", "os": "CachyOS 2025.10", "pkg": "pacman", "kernel": "6.16.4-cachyos", "shell": "zsh", "de": "kde-plasma", "wm": "kwin", "theme": "catppuccin-mocha", "terminal": "kitty", "init": "systemd", "pkgs": "2187", "font": "Iosevka Term" },
+    { "slug": "windows", "os": "Windows 11 25H2", "pkg": "winget", "kernel": "10.0.26200", "shell": "powershell", "de": "windows-shell", "wm": "dwm", "theme": "dark", "terminal": "windows-terminal", "init": "n/a", "pkgs": "n/a", "font": "Cascadia Mono" },
+    { "slug": "macos", "os": "macOS Tahoe 26", "pkg": "brew", "kernel": "26.0", "shell": "zsh", "de": "aqua", "wm": "quartz", "theme": "graphite", "terminal": "iterm2", "init": "launchd", "pkgs": "n/a", "font": "SF Mono" },
+    { "slug": "android", "os": "Android 16", "pkg": "pkg", "kernel": "6.16.4-android16-4", "shell": "sh", "de": "pixel-ui", "wm": "surfaceflinger", "theme": "dynamic", "terminal": "termux", "init": "init", "pkgs": "n/a", "font": "Roboto Mono" },
+    { "slug": "raspbian", "os": "Raspberry Pi OS 13 (trixie)", "pkg": "apt", "kernel": "6.12.0-13-rpi-armv7l", "shell": "bash", "de": "pixel-lxde", "wm": "openbox", "theme": "pixel-dark", "terminal": "lxterminal", "init": "systemd", "pkgs": "1325", "font": "DejaVu Sans Mono" },
+    { "slug": "proxmox", "os": "Proxmox VE 9.0", "pkg": "apt", "kernel": "6.12.22-1-pve", "shell": "bash", "de": "web-ui", "wm": "n/a", "theme": "n/a", "terminal": "tty", "init": "systemd", "pkgs": "945", "font": "Monospace" },
+    { "slug": "truenas_scale", "os": "TrueNAS SCALE 25.04", "pkg": "apt", "kernel": "6.12.22-2.1-truenas", "shell": "bash", "de": "web-ui", "wm": "n/a", "theme": "n/a", "terminal": "tty", "init": "systemd", "pkgs": "712", "font": "Monospace" },
+    { "slug": "parrot", "os": "Parrot OS 6.4", "pkg": "apt", "kernel": "6.16.4-parrot1-amd64", "shell": "zsh", "de": "mate", "wm": "marco", "theme": "dracula", "terminal": "qterminal", "init": "systemd", "pkgs": "3841", "font": "Hack" },
+    { "slug": "gnu", "os": "GNU Hurd (rolling)", "pkg": "pkg", "kernel": "0.9", "shell": "bash", "de": "none", "wm": "n/a", "theme": "n/a", "terminal": "tty", "init": "hurd", "pkgs": "421", "font": "Monospace" }
+  ]
+}

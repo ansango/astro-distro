@@ -1,12 +1,12 @@
 import { fetchLogo } from "../../lib/fastfetch";
-import { distros } from "../../lib/themes";
+import { systems } from "../../lib/themes";
 
-const resolvedDistros = async () =>
+const resolvedSystems = async () =>
 	await Promise.all(
-		distros.map(async (distro) => {
-			const [large, small] = await fetchLogo(distro.slug);
-			return { ...distro, logos: { small, large } };
+		systems.map(async (distro) => {
+			const logo = await fetchLogo(distro.slug);
+			return { ...distro, logo };
 		}),
 	);
 
-export default await resolvedDistros();
+export default await resolvedSystems();

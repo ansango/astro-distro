@@ -1,34 +1,39 @@
 ---
 import DistroLogo from "../components/logos/distro-logo.astro";
+import DistroToggle from "../components/distro-toggle.astro";
 import SectionTitle from "../components/section-title.astro";
 import Btop from "../components/tui/btop/index.astro";
 import Lazygit from "../components/tui/lazygit/index.astro";
 import Mutt from "../components/tui/mutt/index.astro";
 import Ranger from "../components/tui/ranger/index.astro";
 import Layout from "../layouts/default.astro";
-import { type Distro, distros } from "../lib/themes";
+import config from "../config.json";
+
+const { current, systems: distros } = config;
+type System = (typeof distros)[number];
 
 /** `perDistro` marca las filas cuyo valor cambia con la distro activa */
 const info: {
   k: string;
   v?: string;
   dim?: boolean;
-  perDistro?: (distro: Distro) => string;
+  perDistro?: (system: System) => string;
 }[] = [
-  { k: "OS", perDistro: (distro) => distro.os },
-  { k: "Host", v: "ThinkPad X1 Carbon Gen 11" },
-  { k: "Kernel", v: "6.7.4-arch1-1" },
-  { k: "Uptime", v: "since 2019 (btw)" },
-  { k: "Packages", perDistro: (distro) => `4 (${distro.pkg})` },
-  { k: "Shell", v: "zsh 5.9" },
-  { k: "Resolution", v: "1920x1080" },
-  { k: "DE", v: "N/A", dim: true },
-  { k: "WM", v: "i3" },
-  { k: "Theme", v: "catppuccin-mocha" },
-  { k: "Terminal", v: "kitty + zellij" },
-  { k: "CPU", v: "Intel i7-1165G7 (8) @ 4.7GHz" },
-  { k: "GPU", v: "Intel Iris Xe" },
-  { k: "Memory", v: "8421MiB / 32128MiB" },
+  { k: "OS", perDistro: (s) => s.os },
+  { k: "Host", v: current.host },
+  { k: "Kernel", perDistro: (s) => s.kernel },
+  { k: "Uptime", v: current.uptime },
+  { k: "Packages", perDistro: (s) => `${s.pkgs} (${s.pkg})` },
+  { k: "Shell", perDistro: (s) => s.shell },
+  { k: "Resolution", v: current.resolution },
+  { k: "DE", perDistro: (s) => s.de, dim: true },
+  { k: "WM", perDistro: (s) => s.wm },
+  { k: "Theme", perDistro: (s) => s.theme },
+  { k: "Terminal", perDistro: (s) => s.terminal },
+  { k: "Font", perDistro: (s) => s.font },
+  { k: "CPU", v: current.cpu },
+  { k: "GPU", v: current.gpu },
+  { k: "Memory", v: current.memory },
 ];
 ---
 
@@ -38,17 +43,17 @@ const info: {
 >
   <!-- ── fastfetch ─────────────────────────────────────── -->
   <div
-    class="mb-10 flex flex-col items-start gap-[0.8rem] md:flex-row md:gap-12"
+    class="mb-10 flex flex-col items-start md:flex-row gap-6 md:gap-12"
   >
     <DistroLogo />
     <div class="text-[0.92rem] md:pt-[0.3rem]">
       <div class="mb-[0.2rem] text-base font-medium text-accent">
         ansango<span class="text-dim">@</span>dev
       </div>
-      <div class="mb-2 tracking-[-0.05em] text-dim">────────────────</div>
+      <div class="mb-2 tracking-tighter text-dim">────────────────</div>
       {info.map(({ k, v, dim, perDistro }) => (
-                    <div class="mb-[0.05rem]">
-                        <span class="inline-block min-w-[70px] font-medium text-accent md:min-w-[90px]">
+                    <div class="mb-[0.05rem] flex items-center gap-2">
+                        <span class="inline-block font-medium text-accent min-w-[90px]">
                             {k}
                         </span>
                         {perDistro ? (
@@ -89,21 +94,5 @@ const info: {
     <Mutt />
   </section>
 
-  <!-- ── footer ────────────────────────────────────────── -->
-  <footer class="mt-10 text-[0.8rem] text-dim">
-    <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
-      <span class="text-accent">●</span>
-      <span>session closed</span>
-      <span class="text-border">·</span>
-      <span>0 errors</span>
-      <span class="text-border">·</span>
-      <span>0 warnings</span>
-      <span class="text-border">·</span>
-      <span>uptime 5y</span>
-      <span class="text-border">·</span>
-      <span class="text-fg">arch linux · rolling · btw</span>
-      <span class="text-border">·</span>
-      <a href="mailto:hola@ansango.dev" class="text-accent">hola@ansango.dev</a>
-    </div>
-  </footer>
+ 
 </Layout>

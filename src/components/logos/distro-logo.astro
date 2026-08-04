@@ -13,8 +13,7 @@ const { class: className } = Astro.props;
 {allDistros.map((distro) => (
 		<Logo
 			data-distro={distro.slug}
-			small={distro.logos.small}
-			large={distro.logos.large}
+			logo={distro.logo}
 			class={className}
 		/>
 	))}

@@ -60,9 +60,28 @@ const distroVisibilityCss = [
   <body
     class="min-h-screen bg-bg px-2 pt-6 pb-8 font-mono text-[13px] leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:px-6 md:pt-10 md:pb-16 md:text-[14px]"
   >
-    <main class="mx-auto max-w-[820px]">
+    <main class="mx-auto max-w-3xl">
       <slot />
     </main>
-    <DistroToggle />
+
+    
+     <!-- ── footer ────────────────────────────────────────── -->
+  <footer class="mx-auto max-w-3xl mt-10 text-[0.8rem] text-dim">
+    <div class="flex flex-wrap justify-between gap-2 text-[0.85rem]">
+      <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
+      <span class="text-accent">●</span>
+      <span>session closed</span>
+      <span class="text-border">·</span>
+      <span>0 errors</span>
+      <span class="text-border">·</span>
+      <span>0 warnings</span>
+      <span class="text-border">·</span>
+      <span>uptime 5y</span>
+      <span class="text-border">·</span>
+    </div>
+      <span class="text-border">·</span>
+        <DistroToggle />
+    </div>
+  </footer>
   </body>
 </html>
