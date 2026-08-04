@@ -4,40 +4,35 @@ import Content from "../commons/content.astro";
 import Label from "../commons/label.astro";
 
 export interface Props {
-  project?: {
+  projects: {
     name: string;
     description: string;
     repo: string;
     stars: string;
     updated: string;
     url: string;
-  };
+  }[];
 }
 
-const {
-  project = {
-    name: "project.alpha",
-    description: "CLI tool for automating dev workflows — npm, git, docker",
-    repo: "github.com/ansango/alpha",
-    stars: "★ 1.2k",
-    updated: "updated 2 weeks ago",
-    url: "https://github.com/ansango/alpha",
-  },
-} = Astro.props as Props;
+const { projects } = Astro.props;
 ---
 
-<Container>
-  <Label>{project.name}</Label>
-  <Content>
-    <div class="mb-2">{project.description}</div>
-    <div class=" text-dim">{project.repo}</div>
-    <div class=" text-dim">{project.stars}· {project.updated}</div>
-    <a
-      class="mt-[0.4rem] inline-block text-accent hover:underline"
-      href={project.url}
-      target="_blank"
-      rel="noopener"
-      >→ open in browser</a
-    >
-  </Content>
-</Container>
+{projects.map((project, i) => (
+  <div data-detail={i} hidden={i !== 0} class="h-full">
+    <Container>
+      <Label>{project.name}</Label>
+      <Content>
+        <div class="mb-2">{project.description}</div>
+        <div class="text-dim">{project.repo}</div>
+        <div class="text-dim">{project.stars}· {project.updated}</div>
+        <a
+          class="mt-[0.4rem] inline-block text-accent hover:underline"
+          href={project.url}
+          target="_blank"
+          rel="noopener"
+          >→ open in browser</a
+        >
+      </Content>
+    </Container>
+  </div>
+))}

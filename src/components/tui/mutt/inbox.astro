@@ -19,14 +19,17 @@ const {
       date: "15 Aug 2014",
       href: "https://github.com/ansango",
     },
-    { from: "ansango.com", subject: "hola@ansango.dev", date: "10 Jan 2019", href: "https://ansango.com" },
+    {
+      from: "ansango.com",
+      subject: "hola@ansango.dev",
+      date: "10 Jan 2019",
+      href: "https://ansango.com",
+    },
   ],
 } = Astro.props as Props;
 ---
 
-<div
-  class="font-mono my-2 "
->
+<div class="font-mono my-2 ">
   {mails.map(({  from, subject, date, href }) => (
     <a class="grid grid-cols-12 gap-x-4 group" href={href} target="_blank" rel="noopener">
       <span class={`col-span-3 md:col-span-3 hover:cursor-pointer group-hover:text-accent text-c2`}>

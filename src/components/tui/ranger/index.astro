@@ -2,10 +2,72 @@
 import Prompt from "../commons/prompt.astro";
 import Detail from "./detail.astro";
 import Tree from "./tree.astro";
+
+const projects = [
+  {
+    name: "project.alpha",
+    description: "CLI tool for automating dev workflows — npm, git, docker",
+    repo: "github.com/ansango/alpha",
+    stars: "★ 1.2k",
+    updated: "updated 2 weeks ago",
+    url: "https://github.com/ansango/alpha",
+    size: "  4.0K",
+    date: "Jan 15",
+  },
+  {
+    name: "project.beta",
+    description: "Static site generator with markdown and MDX support",
+    repo: "github.com/ansango/beta",
+    stars: "★ 800",
+    updated: "updated last month",
+    url: "https://github.com/ansango/beta",
+    size: "  4.0K",
+    date: "Feb 20",
+  },
+  {
+    name: "project.gamma",
+    description: "Terminal-based music player with last.fm scrobbling",
+    repo: "github.com/ansango/gamma",
+    stars: "★ 200",
+    updated: "updated 3 months ago",
+    url: "https://github.com/ansango/gamma",
+    size: "  4.0K",
+    date: "Mar 10",
+  },
+  {
+    name: "project.delta",
+    description: "CLI for managing dotfiles across multiple machines",
+    repo: "github.com/ansango/delta",
+    stars: "★ 50",
+    updated: "updated 6 months ago",
+    url: "https://github.com/ansango/delta",
+    size: "  4.0K",
+    date: "Apr 05",
+  },
+];
 ---
 
 <Prompt cmd="ranger /home/ansango/projects" class="mb-5" />
 <div class="my-2 grid grid-cols-1 md:grid-cols-2">
-  <Tree />
-  <Detail />
+  <Tree projects={projects} />
+  <Detail projects={projects} />
 </div>
+
+<script>
+  const items =
+    document.querySelectorAll<HTMLButtonElement>("[data-tree-item]");
+  const details = document.querySelectorAll<HTMLElement>("[data-detail]");
+
+  function select(idx: number) {
+    items.forEach((el, i) => {
+      el.classList.toggle("text-accent", i === idx);
+    });
+    details.forEach((el, i) => {
+      el.hidden = i !== idx;
+    });
+  }
+
+  items.forEach((el, i) => {
+    el.addEventListener("click", () => select(i));
+  });
+</script>
