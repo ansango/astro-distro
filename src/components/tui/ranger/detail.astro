@@ -1,7 +1,7 @@
 ---
-import Label from "../commons/label.astro";
 import Container from "../commons/container.astro";
 import Content from "../commons/content.astro";
+import Label from "../commons/label.astro";
 
 export interface Props {
   project?: {
@@ -31,12 +31,16 @@ const {
   <Content>
     <div class="mb-2 text-[0.88rem]">{project.description}</div>
     <div class="text-[0.78rem] text-dim">{project.repo}</div>
-    <div class="text-[0.78rem] text-dim">{project.stars} · {project.updated}</div>
+    <div class="text-[0.78rem] text-dim">
+      {project.stars}
+      · {project.updated}
+    </div>
     <a
       class="mt-[0.4rem] inline-block text-[0.85rem] text-accent hover:underline"
       href={project.url}
       target="_blank"
-      rel="noopener">→ open in browser</a
+      rel="noopener"
+      >→ open in browser</a
     >
   </Content>
 </Container>

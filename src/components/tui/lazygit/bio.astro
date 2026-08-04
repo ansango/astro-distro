@@ -1,22 +1,22 @@
 ---
-import Label from '../commons/label.astro';
-import Paragraph from '../commons/paragraph.astro';
-import Container from '../commons/container.astro';
-import Content from '../commons/content.astro';
+import Container from "../commons/container.astro";
+import Content from "../commons/content.astro";
+import Label from "../commons/label.astro";
+import Paragraph from "../commons/paragraph.astro";
 
 export interface Props {
   items?: {
-    icon: 'M' | '??' | '⎇' ;
+    icon: "M" | "??" | "⎇";
     text: string;
   }[];
 }
 
 const {
   items = [
-    { icon: 'M', text: 'Construyo software limpio, minimalista y funcional' },
-    { icon: 'M', text: 'Me obsesionan los detalles pequeños: tipografía' },
-    { icon: 'M', text: 'Rendimiento, latencia, buenas APIs' },
-    { icon: '??', text: 'Construyo software limpio. Sí, uso Arch.' },
+    { icon: "M", text: "Construyo software limpio, minimalista y funcional" },
+    { icon: "M", text: "Me obsesionan los detalles pequeños: tipografía" },
+    { icon: "M", text: "Rendimiento, latencia, buenas APIs" },
+    { icon: "??", text: "Construyo software limpio. Sí, uso Arch." },
   ],
 } = Astro.props as Props;
 ---
@@ -29,6 +29,5 @@ const {
         <span class="font-medium text-accent" class:list={[item.icon === "??" ? "text-dim" :  ""]}>{item.icon}</span>  <span class:list={[item.icon === "??" ? "" :  "ml-2"]}>{item.text}</span>
       </Paragraph>
     ))}
-
-</Content>
+  </Content>
 </Container>

@@ -1,12 +1,13 @@
 ---
 import DistroToggle from "../components/distro-toggle.astro";
+import config from "../config.json";
 import { DEFAULT_THEME, STORAGE_KEY, themes } from "../lib/themes";
 import "../styles/global.css";
 
 interface Props {
   title: string;
   description?: string;
-  /** slug de un bloque de src/styles/themes.css */
+  /** slug de un sistema en `src/config.json` */
   theme?: string;
   lang?: string;
 }
@@ -19,11 +20,10 @@ const {
 } = Astro.props;
 
 /**
- * Todo lo marcado con `data-distro` se oculta salvo lo de la distro activa.
- * `revert` en vez de `block` para que cada elemento recupere su display de UA
- * (los <pre> de los logos son block, los <span> del bloque de info inline).
- *
- * Al resolverse en CSS no hay flash ni hace falta JS para pintar la distro.
+ * Visibilidad: oculta todo lo marcado con `data-distro` salvo el del tema
+ * activo. `revert` en vez de `block` para que cada elemento recupere su
+ * display de UA (los <pre> de los logos son block, los <span> del info
+ * inline). Al resolverse en CSS no hay flash ni hace falta JS para pintar.
  */
 const distroVisibilityCss = [
   "[data-distro]{display:none}",
@@ -31,6 +31,17 @@ const distroVisibilityCss = [
     (slug) => `[data-theme="${slug}"] [data-distro="${slug}"]{display:revert}`,
   ),
 ].join("");
+
+/**
+ * Tokens de color por distro. Se generan en build time desde `src/config.json`
+ * para tener una sola fuente de verdad.
+ */
+const themeColorsCss = config.systems
+  .map(
+    (s) =>
+      `[data-theme="${s.slug}"]{--color-bg:${s.colors.bg};--color-panel:${s.colors.panel};--color-border:${s.colors.border};--color-fg:${s.colors.fg};--color-dim:${s.colors.dim};--color-accent:${s.colors.accent};--color-c1:${s.colors.c1};--color-c2:${s.colors.c2};--color-c3:${s.colors.c3};}`,
+  )
+  .join("");
 ---
 
 <!doctype html>
@@ -56,6 +67,7 @@ const distroVisibilityCss = [
       }
     </script>
     <style is:global set:html={distroVisibilityCss}></style>
+    <style is:global set:html={themeColorsCss}></style>
   </head>
   <body
     class="min-h-screen bg-bg px-2 pt-6 pb-8 font-mono text-[13px] leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:px-6 md:pt-10 md:pb-16 md:text-[14px]"
@@ -64,24 +76,23 @@ const distroVisibilityCss = [
       <slot />
     </main>
 
-    
-     <!-- ── footer ────────────────────────────────────────── -->
-  <footer class="mx-auto max-w-3xl mt-10 text-[0.8rem] text-dim">
-    <div class="flex flex-wrap justify-between gap-2 text-[0.85rem]">
-      <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
-      <span class="text-accent">●</span>
-      <span>session closed</span>
-      <span class="text-border">·</span>
-      <span>0 errors</span>
-      <span class="text-border">·</span>
-      <span>0 warnings</span>
-      <span class="text-border">·</span>
-      <span>uptime 5y</span>
-      <span class="text-border">·</span>
-    </div>
-      <span class="text-border">·</span>
+    <!-- ── footer ────────────────────────────────────────── -->
+    <footer class="mx-auto max-w-3xl mt-10 text-[0.8rem] text-dim">
+      <div class="flex flex-wrap justify-between gap-2 text-[0.85rem]">
+        <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
+          <span class="text-accent">●</span>
+          <span>session closed</span>
+          <span class="text-border">·</span>
+          <span>0 errors</span>
+          <span class="text-border">·</span>
+          <span>0 warnings</span>
+          <span class="text-border">·</span>
+          <span>uptime 5y</span>
+          <span class="text-border">·</span>
+        </div>
+        <span class="text-border">·</span>
         <DistroToggle />
-    </div>
-  </footer>
+      </div>
+    </footer>
   </body>
 </html>

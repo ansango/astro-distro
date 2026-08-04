@@ -3,6 +3,10 @@ interface Props {
   class?: string;
 }
 ---
-<p class="w-full flex items-center gap-3" class:list={[Astro.props.class ?? ""]}>
-    <slot/>
-  </p>
+
+<p
+  class="w-full flex items-center gap-3"
+  class:list={[Astro.props.class ?? ""]}
+>
+  <slot />
+</p>

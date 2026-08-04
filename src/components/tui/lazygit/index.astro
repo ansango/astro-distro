@@ -1,17 +1,13 @@
 ---
-import  Prompt from "../commons/prompt.astro";
+import Prompt from "../commons/prompt.astro";
 import Bio from "./bio.astro";
 import Paths from "./paths.astro";
 import Status from "./status.astro";
 ---
 
-
-
-<Prompt cmd="lazygit --view bio" class="mb-5"/>
+<Prompt cmd="lazygit --view bio" class="mb-5" />
 <div class="grid grid-cols-1 gap-5">
-     <Status />
-    <Bio/>
-    <Paths/>
+  <Status />
+  <Bio />
+  <Paths />
 </div>
-
-

@@ -1,10 +1,10 @@
 @import "tailwindcss";
-@import "./themes.css";
 
 /* ─────────────────────────────────────────────────────────────
    Tokens base (= tema `arch`).
-   Los `[data-theme]` de themes.css sobrescriben estos valores:
-   viven fuera de capa, así que ganan siempre a `@layer theme`.
+   Los `[data-theme]` se generan en build time desde
+   `src/config.json` por `default.astro` y se inyectan en `<head>`.
+   Viven fuera de capa, así que ganan siempre a `@layer theme`.
 
    `static` fuerza a Tailwind a emitir TODAS las variables aunque
    no se usen todavía — necesario para que los temas puedan
@@ -27,7 +27,6 @@
 	--color-c1: #1793d1;
 	--color-c2: #7eb8d8;
 	--color-c3: #0d5a85;
-
 
 	--text-2xs: 0.625rem;
 	--text-3xs: 0.5rem;

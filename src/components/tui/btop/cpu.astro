@@ -1,7 +1,7 @@
 ---
-import Label from "../commons/label.astro";
 import Container from "../commons/container.astro";
 import Content from "../commons/content.astro";
+import Label from "../commons/label.astro";
 
 export interface Props {
   usage?: {
@@ -14,10 +14,19 @@ export interface Props {
 
 const {
   usage = [
-    { label: "editor", percent: 100, detail: "neovim 0.9.5", note: "(lazyvim distro)" },
+    {
+      label: "editor",
+      percent: 100,
+      detail: "neovim 0.9.5",
+      note: "(lazyvim distro)",
+    },
     { label: "terminal", percent: 60, detail: "kitty + zellij 0.39.1" },
     { label: "shell", percent: 50, detail: "zsh + oh-my-zsh + starship" },
-    { label: "cli tools", percent: 50, detail: "fzf · ripgrep · fd · bat · eza" },
+    {
+      label: "cli tools",
+      percent: 50,
+      detail: "fzf · ripgrep · fd · bat · eza",
+    },
     { label: "browser", percent: 20, detail: "firefox developer edition" },
     { label: "notes", percent: 10, detail: "obsidian", note: "(syncthing)" },
     { label: "music", percent: 10, detail: "spotify + spicetify" },

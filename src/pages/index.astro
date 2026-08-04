@@ -1,13 +1,12 @@
 ---
 import DistroLogo from "../components/logos/distro-logo.astro";
-import DistroToggle from "../components/distro-toggle.astro";
 import SectionTitle from "../components/section-title.astro";
 import Btop from "../components/tui/btop/index.astro";
 import Lazygit from "../components/tui/lazygit/index.astro";
 import Mutt from "../components/tui/mutt/index.astro";
 import Ranger from "../components/tui/ranger/index.astro";
-import Layout from "../layouts/default.astro";
 import config from "../config.json";
+import Layout from "../layouts/default.astro";
 
 const { current, systems: distros } = config;
 type System = (typeof distros)[number];
@@ -42,9 +41,7 @@ const info: {
   description="ansango — portfolio fastfetch style"
 >
   <!-- ── fastfetch ─────────────────────────────────────── -->
-  <div
-    class="mb-10 flex flex-col items-start md:flex-row gap-6 md:gap-12"
-  >
+  <div class="mb-10 flex flex-col items-start md:flex-row gap-6 md:gap-12">
     <DistroLogo />
     <div class="text-[0.92rem] md:pt-[0.3rem]">
       <div class="mb-[0.2rem] text-base font-medium text-accent">
@@ -93,6 +90,4 @@ const info: {
     <SectionTitle title="contact" />
     <Mutt />
   </section>
-
- 
 </Layout>
