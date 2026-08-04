@@ -5,27 +5,40 @@ import Label from "../commons/label.astro";
 import Paragraph from "../commons/paragraph.astro";
 
 export interface Props {
-  status: {
-    branch: string;
-    since: string;
-    modified: number;
-    untracked: number;
-  };
+	status: {
+		branch: string;
+		since: string;
+		ahead?: number;
+		behind?: number;
+		modified: number;
+		untracked: number;
+	};
 }
 
 const { status } = Astro.props;
+
+// Solo emitimos `↑N ahead` / `↓N behind` cuando hay commits sin sincronizar
+const ahead = status.ahead ?? 0;
+const behind = status.behind ?? 0;
+const syncBits: string[] = [];
+if (ahead > 0) syncBits.push(`↑${ahead} ahead`);
+if (behind > 0) syncBits.push(`↓${behind} behind`);
 ---
 
 <Container>
-  <Label>status</Label>
-  <Content>
-    <Paragraph>
-      <span class="font-medium text-accent">⎇ {status.branch}</span>
-      · since {status.since} ·
-      <span class="text-dim"
-        >+{status.modified}
-        modified · {status.untracked} untracked</span
-      >
-    </Paragraph>
-  </Content>
+	<Label>status</Label>
+	<Content>
+		<Paragraph>
+			<span class="font-medium text-accent">⎇ {status.branch}</span>
+			· since {status.since} ·
+			{syncBits.length > 0 && (
+				<span class="text-fg">{syncBits.join(" · ")}</span>
+				<span class="text-border"> · </span>
+			)}
+			<span class="text-dim"
+				>+{status.modified}
+				modified · {status.untracked} untracked</span
+			>
+		</Paragraph>
+	</Content>
 </Container>

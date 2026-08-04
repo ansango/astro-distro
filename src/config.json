@@ -672,25 +672,39 @@
 			"status": {
 				"branch": "main",
 				"since": "2019",
-				"modified": 3,
+				"ahead": 2,
+				"behind": 0,
+				"modified": 6,
 				"untracked": 1
 			},
 			"bio": [
 				{
 					"icon": "M",
-					"text": "Construyo software limpio, minimalista y funcional"
+					"text": "Senior software engineer — JS/TS, frontend, performance"
 				},
 				{
 					"icon": "M",
-					"text": "Me obsesionan los detalles pequeños: tipografía"
+					"text": "Remote Tech Lead @ innusual — frontend and sometimes backend"
 				},
 				{
 					"icon": "M",
-					"text": "Rendimiento, latencia, buenas APIs"
+					"text": "Typography, latency, good APIs. Details matter"
+				},
+				{
+					"icon": "M",
+					"text": "Law @ USAL → pivoted to software out of curiosity"
+				},
+				{
+					"icon": "M",
+					"text": "Vinyl and analog/digital photography — always learning"
+				},
+				{
+					"icon": "M",
+					"text": "Homelab on Proxmox + TrueNAS, Docker on top"
 				},
 				{
 					"icon": "??",
-					"text": "Construyo software limpio. Sí, uso Arch."
+					"text": "Migrating from Arch to Debian. The ansango syndrome"
 				}
 			],
 			"paths": [
@@ -699,13 +713,22 @@
 					"current": true
 				},
 				{
-					"name": "feature/webdev"
+					"name": "feature/astro"
 				},
 				{
-					"name": "feature/security-research"
+					"name": "feature/svelte"
 				},
 				{
-					"name": "feature/ctf-writeups"
+					"name": "feature/homelab"
+				},
+				{
+					"name": "feature/photography-migration"
+				},
+				{
+					"name": "feature/3d-printing"
+				},
+				{
+					"name": "feature/blog-cleanup"
 				}
 			]
 		},
@@ -798,28 +821,36 @@
 					{
 						"label": "terminal",
 						"percent": 60,
-						"detail": "gnome-terminal"
-					},
-					{
-						"label": "shell",
-						"percent": 50,
-						"detail": "zsh/oh-my-zsh/powerlevel10k"
+						"detail": "GNOME Terminal + tmux"
 					},
 					{
 						"label": "browser",
-						"percent": 25,
-						"detail": "brave"
+						"percent": 20,
+						"detail": "firefox / brave"
 					},
 					{
 						"label": "notes",
-						"percent": 50,
+						"percent": 10,
 						"detail": "obsidian",
 						"note": "(live sync)"
 					},
 					{
 						"label": "music",
-						"percent": 20,
-						"detail": "navidrome"
+						"percent": 10,
+						"detail": "navidrome",
+						"note": "(lastfm scrobbling)"
+					},
+					{
+						"label": "3d printing",
+						"percent": 10,
+						"detail": "bambulab A1",
+						"note": "(orca)"
+					},
+					{
+						"label": "homelab",
+						"percent": 10,
+						"detail": "Proxmox VE",
+						"note": "(lxc containers)"
 					},
 					{
 						"label": "theme",
@@ -829,7 +860,7 @@
 					{
 						"label": "font",
 						"percent": 40,
-						"detail": "jetbrains mono"
+						"detail": "JetBrains Mono"
 					}
 				]
 			},
@@ -841,9 +872,16 @@
 			},
 			"hardware": {
 				"label": "hardware",
-				"device": "Gigabyte B660M i5-12400F",
-				"ram": "64gb ram",
-				"os": "debian linux"
+				"device": "Gigabyte B660M DS3H DDR4",
+				"ram": "64 GB DDR4",
+				"os": "Debian 13 Trixie"
+			},
+			"peripherals": {
+				"label": "peripherals",
+				"keyboard": "Keychron K6 / Redragon K652",
+				"mouse": "Logitech G Pro",
+				"headphones": "JBL 355BT",
+				"monitor": "2 x 27' LG 4K (27US500-W)"
 			}
 		},
 		"contact": {

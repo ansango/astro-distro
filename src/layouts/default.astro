@@ -17,7 +17,7 @@ const {
 	title,
 	description = "",
 	theme = DEFAULT_THEME,
-	lang = "es",
+	lang = "en",
 } = Astro.props;
 
 const distroVisibilityCss = [
@@ -34,10 +34,6 @@ const themeColorsCss = config.systems
 	)
 	.join("");
 
-// Fuentes dinámicas: cada `[data-theme]` sobreescribe `--font-mono` con la
-// familia bundled vía `@fontsource` (los imports viven en `lib/fonts.ts`).
-// Como Tailwind v4 genera `font-mono { font-family: var(--font-mono); }`,
-// basta con tocar la variable para que el `<body>` y todo el árbol cambien.
 const themeFontsCss = config.systems
 	.map(
 		(s) =>
