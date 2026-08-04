@@ -8,7 +8,7 @@ const { command, root, projects } = config.sections.projects;
 ---
 
 <Prompt cmd={command} class="mb-5" />
-<div class="my-2 grid grid-cols-1 md:grid-cols-2">
+<div class="my-2 grid grid-cols-1">
   <Tree projects={projects} root={root} />
   <Detail projects={projects} />
 </div>

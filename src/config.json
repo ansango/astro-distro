@@ -1,6 +1,6 @@
 {
 	"current": {
-		"host": "Gigabyte B660",
+		"host": "Gigabyte B660 DS3H DDR4",
 		"uptime": "1 day, 2 hours, 30 minutes",
 		"resolution": "3840x2400",
 		"kernel": "6.12.0-13-amd64",
@@ -714,44 +714,74 @@
 			"root": "/home/ansango",
 			"projects": [
 				{
-					"name": "project.alpha",
-					"description": "CLI tool for automating dev workflows — npm, git, docker",
-					"repo": "github.com/ansango/alpha",
-					"stars": "★ 1.2k",
-					"updated": "updated 2 weeks ago",
-					"url": "https://github.com/ansango/alpha",
-					"size": "4.0K",
-					"date": "Jan 15"
+					"name": "ansango.template",
+					"description": "A modern, content-first personal website built with Astro, designed for technology arti…",
+					"repo": "github.com/ansango/ansango.template",
+					"stars": "★ 1",
+					"updated": "updated 8 months ago",
+					"url": "https://github.com/ansango/ansango.template",
+					"size": "1.7M",
+					"date": "Nov 19"
 				},
 				{
-					"name": "project.beta",
-					"description": "Static site generator with markdown and MDX support",
-					"repo": "github.com/ansango/beta",
-					"stars": "★ 800",
-					"updated": "updated last month",
-					"url": "https://github.com/ansango/beta",
-					"size": "4.0K",
-					"date": "Feb 20"
+					"name": "anibalsantosgomez.film",
+					"description": "A portfolio website showcasing analog photography. Built with Next.js and TinaCMS",
+					"repo": "github.com/ansango/anibalsantosgomez.film",
+					"stars": "★ 1",
+					"updated": "updated 1 year ago",
+					"url": "https://github.com/ansango/anibalsantosgomez.film",
+					"size": "276.7M",
+					"date": "Sep 18"
 				},
 				{
-					"name": "project.gamma",
-					"description": "Terminal-based music player with last.fm scrobbling",
-					"repo": "github.com/ansango/gamma",
-					"stars": "★ 200",
-					"updated": "updated 3 months ago",
-					"url": "https://github.com/ansango/gamma",
-					"size": "4.0K",
-					"date": "Mar 10"
+					"name": "uziq",
+					"description": "Uziq is a web application built with Svelte 5, Svelkit, TypeScript, TailwindCSS, and Ta…",
+					"repo": "github.com/ansango/uziq",
+					"stars": "★ 2",
+					"updated": "updated 1 year ago",
+					"url": "https://github.com/ansango/uziq",
+					"size": "219K",
+					"date": "May 22"
 				},
 				{
-					"name": "project.delta",
-					"description": "CLI for managing dotfiles across multiple machines",
-					"repo": "github.com/ansango/delta",
-					"stars": "★ 50",
-					"updated": "updated 6 months ago",
-					"url": "https://github.com/ansango/delta",
-					"size": "4.0K",
-					"date": "Apr 05"
+					"name": "lastfm-api",
+					"description": "A node ts lastfm client api",
+					"repo": "github.com/ansango/lastfm-api",
+					"stars": "★ 1",
+					"updated": "updated yesterday",
+					"url": "https://github.com/ansango/lastfm-api",
+					"size": "386K",
+					"date": "Aug 03"
+				},
+				{
+					"name": "obsidian-metadata-links",
+					"description": "a simple metadata links obsidian plugin",
+					"repo": "github.com/ansango/obsidian-metadata-links",
+					"stars": "★ 1",
+					"updated": "updated 3 weeks ago",
+					"url": "https://github.com/ansango/obsidian-metadata-links",
+					"size": "167K",
+					"date": "Jul 10"
+				},
+				{
+					"name": "obsidian-slugify",
+					"description": "a simple renaming filename obsidian plugin",
+					"repo": "github.com/ansango/obsidian-slugify",
+					"stars": "★ 1",
+					"updated": "updated 3 weeks ago",
+					"url": "https://github.com/ansango/obsidian-slugify",
+					"size": "81K",
+					"date": "Jul 09"
+				},
+				{
+					"name": "lastfm-cli",
+					"description": "CLI for the Last.fm API, built on lastfm-client-ts. Read-only by default.",
+					"repo": "github.com/ansango/lastfm-cli",
+					"stars": "★ 1",
+					"updated": "updated yesterday",
+					"url": "https://github.com/ansango/lastfm-cli",
+					"size": "44K",
+					"date": "Aug 03"
 				}
 			]
 		},
@@ -763,44 +793,38 @@
 					{
 						"label": "editor",
 						"percent": 100,
-						"detail": "neovim 0.9.5",
-						"note": "(lazyvim distro)"
+						"detail": "zed / vscode"
 					},
 					{
 						"label": "terminal",
 						"percent": 60,
-						"detail": "kitty + zellij 0.39.1"
+						"detail": "gnome-terminal"
 					},
 					{
 						"label": "shell",
 						"percent": 50,
-						"detail": "zsh + oh-my-zsh + starship"
-					},
-					{
-						"label": "cli tools",
-						"percent": 50,
-						"detail": "fzf · ripgrep · fd · bat · eza"
+						"detail": "zsh/oh-my-zsh/powerlevel10k"
 					},
 					{
 						"label": "browser",
-						"percent": 20,
-						"detail": "firefox developer edition"
+						"percent": 25,
+						"detail": "brave"
 					},
 					{
 						"label": "notes",
-						"percent": 10,
+						"percent": 50,
 						"detail": "obsidian",
-						"note": "(syncthing)"
+						"note": "(live sync)"
 					},
 					{
 						"label": "music",
-						"percent": 10,
-						"detail": "spotify + spicetify"
+						"percent": 20,
+						"detail": "navidrome"
 					},
 					{
 						"label": "theme",
 						"percent": 50,
-						"detail": "catppuccin mocha"
+						"detail": "tokyo night"
 					},
 					{
 						"label": "font",
@@ -811,15 +835,15 @@
 			},
 			"memory": {
 				"used": 8.2,
-				"total": 32,
-				"theme": "catppuccin",
+				"total": 64,
+				"theme": "tokyo night",
 				"themePercent": 100
 			},
 			"hardware": {
 				"label": "hardware",
-				"device": "thinkpad x1 carbon gen 11",
-				"ram": "32gb ram",
-				"os": "arch linux"
+				"device": "Gigabyte B660M i5-12400F",
+				"ram": "64gb ram",
+				"os": "debian linux"
 			}
 		},
 		"contact": {
