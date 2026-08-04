@@ -4,6 +4,7 @@ import Prompt from "../commons/prompt.astro";
 import Cpu from "./cpu.astro";
 import Hardware from "./hardware.astro";
 import Mem from "./mem.astro";
+import Peripherals from "./peripherals.astro";
 
 const uses = config.sections.uses;
 ---
@@ -17,4 +18,5 @@ const uses = config.sections.uses;
     ram={uses.hardware.ram}
     os={uses.hardware.os}
   />
+  <Peripherals peripherals={uses.peripherals} />
 </div>
