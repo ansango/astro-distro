@@ -12,6 +12,12 @@
       "devDependencies": {
         "@astrojs/check": "^0.9.10",
         "@biomejs/biome": "2.5.6",
+        "@fontsource/fira-code": "^5.3.0",
+        "@fontsource/inter": "^5.3.0",
+        "@fontsource/jetbrains-mono": "^5.3.0",
+        "@fontsource/noto-sans-mono": "^5.3.0",
+        "@fontsource/roboto-mono": "^5.3.0",
+        "@fontsource/ubuntu-mono": "^5.3.0",
         "typescript": "^6",
       },
     },
@@ -176,6 +182,18 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.28.1", "", { "os": "win32", "cpu": "ia32" }, "sha512-zvb/mB2bSCoJOpoCBgYKKpX6YM6mJBlBUVUtVj41DlZJVEB6/0CKlRYxP5wWl1C1ILiCoAU5wZZ4q1P3qeS6Eg=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.28.1", "", { "os": "win32", "cpu": "x64" }, "sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A=="],
+
+    "@fontsource/fira-code": ["@fontsource/fira-code@5.3.0", "", {}, "sha512-EJL968RJRkakubAj/coU8pSUaeTE5UNoRjtzAr6kGiSZ3jWuN8/AKWHwym/PFUaQL1q7IL/H+EXs4358YhrTBQ=="],
+
+    "@fontsource/inter": ["@fontsource/inter@5.3.0", "", {}, "sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g=="],
+
+    "@fontsource/jetbrains-mono": ["@fontsource/jetbrains-mono@5.3.0", "", {}, "sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A=="],
+
+    "@fontsource/noto-sans-mono": ["@fontsource/noto-sans-mono@5.3.0", "", {}, "sha512-DPZ+/Ng9HP5UKiALCKtoeGfA7zJzEjHFB/18OU/c3+4I9zZ3eMVAuFZb0SqzT89Yj7KNhJFYnYjyDaVKhdRuUg=="],
+
+    "@fontsource/roboto-mono": ["@fontsource/roboto-mono@5.3.0", "", {}, "sha512-yhwplHMHW9dCk+1pZuERfcJe+K3rosGVZEoK0XktkxRSqQ9qsipSwwiuW2/8Qmtp9lzu3Ixa/ie4BMH3i8CkZQ=="],
+
+    "@fontsource/ubuntu-mono": ["@fontsource/ubuntu-mono@5.3.0", "", {}, "sha512-hLwLkeAV9YvLSOWExn0heOXy+EB4wKnt648qS5FaqsiCZDS8X9kR/ueIBzzX/vNSXjFkhLRSTKqlOfFvHdD4Bw=="],
 
     "@img/colour": ["@img/colour@1.1.0", "", {}, "sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ=="],
 
