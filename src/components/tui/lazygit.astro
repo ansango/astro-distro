@@ -1,0 +1,23 @@
+---
+import Prompt from "../prompt.astro";
+---
+
+<Prompt cmd="lazygit --view bio" />
+<pre
+    class="my-2 overflow-x-auto text-[0.82rem] leading-normal whitespace-pre">
+<span class="text-dim">┌─ status ──────────────────────────────────────────────────────────────────┐</span>
+│ <span class="font-medium text-accent">⎇ main</span>  ·  since 2019  ·  <span class="text-dim">+3 modified · 1 untracked</span>                          │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+<span class="text-dim">┌─ bio (modified) ─────────────────────────────────────────────────────────┐</span>
+│  <span class="font-medium text-accent">M</span>  Construyo software limpio, minimalista y funcional                    │
+│  <span class="font-medium text-accent">M</span>  Me obsesionan los detalles pequeños: tipografía                        │
+│  <span class="font-medium text-accent">M</span>  Rendimiento, latencia, buenas APIs                                    │
+│  <span class="text-dim">??</span> Construyo software limpio. Sí, uso Arch.                     │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+<span class="text-dim">┌─ paths (local) ──────────────────────────────────────────────────────────┐</span>
+│  <span class="font-medium text-accent">* main</span>                                                              │
+│    feature/webdev                                                           │
+│    feature/security-research                                                │
+│    feature/ctf-writeups                                                     │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+</pre>
