@@ -17,6 +17,9 @@ import "@fontsource/fira-code/700.css";
 import "@fontsource/noto-sans-mono/400.css";
 import "@fontsource/noto-sans-mono/500.css";
 import "@fontsource/noto-sans-mono/700.css";
+import "@fontsource/noto-sans/400.css";
+import "@fontsource/noto-sans/500.css";
+import "@fontsource/noto-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
@@ -44,6 +47,7 @@ export const FONT_FAMILY: Record<SystemFont, string> = {
 	"Ubuntu Mono": "Ubuntu Mono",
 	"Hack": "Fira Code",
 	"Inter": "Inter",
+	"Noto Sans": "Noto Sans",
 	"Noto Sans Mono": "Noto Sans Mono",
 	"Roboto Mono": "Roboto Mono",
 	// Sustitutos para fonts que NO están en @fontsource (mismo estilo):

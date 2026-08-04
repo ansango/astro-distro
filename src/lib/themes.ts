@@ -14,7 +14,7 @@ export type Theme = System["slug"];
 
 export const themes: Theme[] = systems.map((distro) => distro.slug).sort();
 
-export const DEFAULT_THEME: Theme = "arch";
+export const DEFAULT_THEME: Theme = "debian";
 
 /** clave de localStorage — replicada literalmente en el script anti-FOUC del layout */
 export const STORAGE_KEY = "theme";

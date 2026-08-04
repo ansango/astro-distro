@@ -1,18 +1,18 @@
 {
 	"current": {
-		"host": "ThinkPad X1 Carbon Gen 11",
+		"host": "Gigabyte B660",
 		"uptime": "1 day, 2 hours, 30 minutes",
 		"resolution": "3840x2400",
-		"kernel": "6.7.4-arch1-1",
-		"shell": "zsh 5.9",
-		"de": "N/A",
-		"wm": "i3",
-		"theme": "catppuccin-mocha",
-		"terminal": "kitty + zellij",
-		"cpu": "Intel i7-1165G7 (8) @ 4.7GHz",
-		"gpu": "Intel Iris Xe",
-		"memory": "8421MiB / 32128MiB",
-		"font": "Iosevka Term 14"
+		"kernel": "6.12.0-13-amd64",
+		"shell": "gnome shell",
+		"de": "gnome",
+		"wm": "mutter",
+		"theme": "tokyo night",
+		"terminal": "gnome-terminal",
+		"cpu": "Intel i5 12th Gen",
+		"gpu": "NVIDIA GTX 1060 6GB",
+		"memory": "16384MiB / 65536MiB",
+		"font": "Monospace"
 	},
 	"systems": [
 		{
@@ -70,14 +70,14 @@
 			"os": "Debian 13 (trixie)",
 			"pkg": "apt",
 			"kernel": "6.12.0-13-amd64",
-			"shell": "bash",
+			"shell": "gnome shell",
 			"de": "gnome",
 			"wm": "mutter",
-			"theme": "catppuccin-mocha",
+			"theme": "tokyo night",
 			"terminal": "gnome-terminal",
 			"init": "systemd",
 			"pkgs": "2318",
-			"font": "DejaVu Sans Mono",
+			"font": "JetBrains Mono",
 			"colors": {
 				"bg": "#0b0709",
 				"panel": "#140d11",
