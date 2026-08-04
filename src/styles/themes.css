@@ -8,6 +8,30 @@
    los 9 valores — no hay que tocar ningún componente.
    ───────────────────────────────────────────────────────────── */
 
+[data-theme="windows"] {
+	--color-bg: #0b0c0d;
+	--color-panel: #141617;
+	--color-border: #1f2226;
+	--color-fg: #d8d8d8;
+	--color-dim: #5e646c;
+	--color-accent: #0078d4;
+	--color-c1: #0078d4;
+	--color-c2: #7eb8f0;
+	--color-c3: #005a9e;
+}
+
+[data-theme="macos"] {
+	--color-bg: #0b0a08;
+	--color-panel: #14120f;
+	--color-border: #1f1c17;
+	--color-fg: #d8d8d8;
+	--color-dim: #5e5b50;
+	--color-accent: #007aff;
+	--color-c1: #007aff;
+	--color-c2: #7eb8ff;
+	--color-c3: #0059b2;
+}
+
 [data-theme="arch"] {
 	--color-bg: #08090b;
 	--color-panel: #0e1014;

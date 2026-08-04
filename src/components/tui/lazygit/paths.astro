@@ -1,0 +1,32 @@
+---
+import Label from '../commons/label.astro';
+import Paragraph from '../commons/paragraph.astro';
+import Container from '../commons/container.astro';
+import Content from '../commons/content.astro';
+
+export interface Props {
+
+}
+
+const {
+  
+} = Astro.props as Props;
+---
+
+<Container>
+  <Label>paths (local)</Label>
+  <Content>
+  <Paragraph>
+    <span class="font-medium text-accent">* main</span>  
+  </Paragraph>
+  <Paragraph class="ml-3.5">
+    feature/webdev
+  </Paragraph>
+  <Paragraph class="ml-3.5">
+    feature/security-research
+  </Paragraph>
+  <Paragraph class="ml-3.5">
+    feature/ctf-writeups
+  </Paragraph>
+  </Content>
+</Container>

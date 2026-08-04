@@ -2,12 +2,10 @@
 import Prompt from "../prompt.astro";
 ---
 
-<Prompt
-    cmd="btop --view stack — daily usage & hardware"
-    class="mb-[0.4rem]"
-/>
+<Prompt cmd="btop --view stack — daily usage & hardware" class="mb-[0.4rem]" />
 <pre
-    class="my-2 overflow-x-auto text-[0.7rem] leading-normal whitespace-pre md:text-[0.82rem]">
+  class="my-2 overflow-x-auto text-[0.7rem] leading-normal whitespace-pre md:text-[0.82rem]"
+>
 <span class="text-dim">┌─ CPU [daily usage] ───────────────────────────────────────────────────────┐</span>
 │ <span>editor      </span> <span class="text-accent">████████████████████</span> <span class="text-dim">100%</span>  <span>neovim 0.9.5</span>           <span class="text-dim">(lazyvim distro)</span> │
 │ <span>terminal    </span> <span class="text-accent/70">██████████████░░░░░░</span> <span class="text-dim"> 60%</span>  <span>kitty + zellij 0.39.1</span>                  │

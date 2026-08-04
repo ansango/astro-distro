@@ -10,44 +10,43 @@ import { type Distro, distros } from "../lib/themes";
 
 /** `perDistro` marca las filas cuyo valor cambia con la distro activa */
 const info: {
-    k: string;
-    v?: string;
-    dim?: boolean;
-    perDistro?: (distro: Distro) => string;
+  k: string;
+  v?: string;
+  dim?: boolean;
+  perDistro?: (distro: Distro) => string;
 }[] = [
-    { k: "OS", perDistro: (distro) => distro.os },
-    { k: "Host", v: "ThinkPad X1 Carbon Gen 11" },
-    { k: "Kernel", v: "6.7.4-arch1-1" },
-    { k: "Uptime", v: "since 2019 (btw)" },
-    { k: "Packages", perDistro: (distro) => `4 (${distro.pkg})` },
-    { k: "Shell", v: "zsh 5.9" },
-    { k: "Resolution", v: "1920x1080" },
-    { k: "DE", v: "N/A", dim: true },
-    { k: "WM", v: "i3" },
-    { k: "Theme", v: "catppuccin-mocha" },
-    { k: "Terminal", v: "kitty + zellij" },
-    { k: "CPU", v: "Intel i7-1165G7 (8) @ 4.7GHz" },
-    { k: "GPU", v: "Intel Iris Xe" },
-    { k: "Memory", v: "8421MiB / 32128MiB" },
+  { k: "OS", perDistro: (distro) => distro.os },
+  { k: "Host", v: "ThinkPad X1 Carbon Gen 11" },
+  { k: "Kernel", v: "6.7.4-arch1-1" },
+  { k: "Uptime", v: "since 2019 (btw)" },
+  { k: "Packages", perDistro: (distro) => `4 (${distro.pkg})` },
+  { k: "Shell", v: "zsh 5.9" },
+  { k: "Resolution", v: "1920x1080" },
+  { k: "DE", v: "N/A", dim: true },
+  { k: "WM", v: "i3" },
+  { k: "Theme", v: "catppuccin-mocha" },
+  { k: "Terminal", v: "kitty + zellij" },
+  { k: "CPU", v: "Intel i7-1165G7 (8) @ 4.7GHz" },
+  { k: "GPU", v: "Intel Iris Xe" },
+  { k: "Memory", v: "8421MiB / 32128MiB" },
 ];
 ---
 
 <Layout
-    title="ansango · arch"
-    description="ansango — portfolio fastfetch style"
+  title="ansango · arch"
+  description="ansango — portfolio fastfetch style"
 >
-    <!-- ── fastfetch ─────────────────────────────────────── -->
-    <div
-        class="mb-10 flex flex-col items-start gap-[0.8rem] md:flex-row md:gap-12"
-    >
-        <DistroLogo />
-        <div class="text-[0.92rem] md:pt-[0.3rem]">
-            <div class="mb-[0.2rem] text-base font-medium text-accent">
-                ansango<span class="text-dim">@</span>dev
-            </div>
-            <div class="mb-2 tracking-[-0.05em] text-dim">────────────────</div>
-            {
-                info.map(({ k, v, dim, perDistro }) => (
+  <!-- ── fastfetch ─────────────────────────────────────── -->
+  <div
+    class="mb-10 flex flex-col items-start gap-[0.8rem] md:flex-row md:gap-12"
+  >
+    <DistroLogo />
+    <div class="text-[0.92rem] md:pt-[0.3rem]">
+      <div class="mb-[0.2rem] text-base font-medium text-accent">
+        ansango<span class="text-dim">@</span>dev
+      </div>
+      <div class="mb-2 tracking-[-0.05em] text-dim">────────────────</div>
+      {info.map(({ k, v, dim, perDistro }) => (
                     <div class="mb-[0.05rem]">
                         <span class="inline-block min-w-[70px] font-medium text-accent md:min-w-[90px]">
                             {k}
@@ -62,52 +61,49 @@ const info: {
                             <span class:list={[dim && "text-dim"]}>{v}</span>
                         )}
                     </div>
-                ))
-            }
-        </div>
+                ))}
     </div>
+  </div>
 
-    <!-- ── about ─────────────────────────────────────────── -->
-    <section class="my-10">
-        <SectionTitle title="about" />
-        <Lazygit />
-    </section>
+  <!-- ── about ─────────────────────────────────────────── -->
+  <section class="my-10">
+    <SectionTitle title="about" />
+    <Lazygit />
+  </section>
 
-    <!-- ── projects ──────────────────────────────────────── -->
-    <section class="my-10">
-        <SectionTitle title="projects" />
-        <Ranger />
-    </section>
+  <!-- ── projects ──────────────────────────────────────── -->
+  <section class="my-10">
+    <SectionTitle title="projects" />
+    <Ranger />
+  </section>
 
-    <!-- ── uses ──────────────────────────────────────────── -->
-    <section class="my-10">
-        <SectionTitle title="uses" />
-        <Btop />
-    </section>
+  <!-- ── uses ──────────────────────────────────────────── -->
+  <section class="my-10">
+    <SectionTitle title="uses" />
+    <Btop />
+  </section>
 
-    <!-- ── contact ───────────────────────────────────────── -->
-    <section class="my-10">
-        <SectionTitle title="contact" />
-        <Mutt />
-    </section>
+  <!-- ── contact ───────────────────────────────────────── -->
+  <section class="my-10">
+    <SectionTitle title="contact" />
+    <Mutt />
+  </section>
 
-    <!-- ── footer ────────────────────────────────────────── -->
-    <footer class="mt-10 text-[0.8rem] text-dim">
-        <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
-            <span class="text-accent">●</span>
-            <span>session closed</span>
-            <span class="text-border">·</span>
-            <span>0 errors</span>
-            <span class="text-border">·</span>
-            <span>0 warnings</span>
-            <span class="text-border">·</span>
-            <span>uptime 5y</span>
-            <span class="text-border">·</span>
-            <span class="text-fg">arch linux · rolling · btw</span>
-            <span class="text-border">·</span>
-            <a href="mailto:hola@ansango.dev" class="text-accent"
-                >hola@ansango.dev</a
-            >
-        </div>
-    </footer>
+  <!-- ── footer ────────────────────────────────────────── -->
+  <footer class="mt-10 text-[0.8rem] text-dim">
+    <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
+      <span class="text-accent">●</span>
+      <span>session closed</span>
+      <span class="text-border">·</span>
+      <span>0 errors</span>
+      <span class="text-border">·</span>
+      <span>0 warnings</span>
+      <span class="text-border">·</span>
+      <span>uptime 5y</span>
+      <span class="text-border">·</span>
+      <span class="text-fg">arch linux · rolling · btw</span>
+      <span class="text-border">·</span>
+      <a href="mailto:hola@ansango.dev" class="text-accent">hola@ansango.dev</a>
+    </div>
+  </footer>
 </Layout>

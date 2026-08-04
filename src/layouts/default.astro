@@ -4,18 +4,18 @@ import { DEFAULT_THEME, STORAGE_KEY, themes } from "../lib/themes";
 import "../styles/global.css";
 
 interface Props {
-	title: string;
-	description?: string;
-	/** slug de un bloque de src/styles/themes.css */
-	theme?: string;
-	lang?: string;
+  title: string;
+  description?: string;
+  /** slug de un bloque de src/styles/themes.css */
+  theme?: string;
+  lang?: string;
 }
 
 const {
-	title,
-	description = "",
-	theme = DEFAULT_THEME,
-	lang = "es",
+  title,
+  description = "",
+  theme = DEFAULT_THEME,
+  lang = "es",
 } = Astro.props;
 
 /**
@@ -26,43 +26,43 @@ const {
  * Al resolverse en CSS no hay flash ni hace falta JS para pintar la distro.
  */
 const distroVisibilityCss = [
-	"[data-distro]{display:none}",
-	...themes.map(
-		(slug) => `[data-theme="${slug}"] [data-distro="${slug}"]{display:revert}`,
-	),
+  "[data-distro]{display:none}",
+  ...themes.map(
+    (slug) => `[data-theme="${slug}"] [data-distro="${slug}"]{display:revert}`,
+  ),
 ].join("");
 ---
 
 <!doctype html>
 <html lang={lang} data-theme={theme} class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title}</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
-			rel="stylesheet"
-		/>
-		<!-- aplica el tema guardado antes del primer paint para evitar el flash -->
-		<script is:inline define:vars={{ themes, storageKey: STORAGE_KEY }}>
-			const stored = localStorage.getItem(storageKey);
-			if (stored && themes.includes(stored)) {
-				document.documentElement.dataset.theme = stored;
-			}
-		</script>
-		<style is:global set:html={distroVisibilityCss}></style>
-	</head>
-	<body
-		class="min-h-screen bg-bg px-2 pt-6 pb-8 font-mono text-[13px] leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:px-6 md:pt-10 md:pb-16 md:text-[14px]"
-	>
-		<main class="mx-auto max-w-[820px]">
-			<slot />
-		</main>
-		<DistroToggle />
-	</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <meta name="generator" content={Astro.generator}>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    >
+    <!-- aplica el tema guardado antes del primer paint para evitar el flash -->
+    <script is:inline define:vars={{ themes, storageKey: STORAGE_KEY }}>
+      const stored = localStorage.getItem(storageKey);
+      if (stored && themes.includes(stored)) {
+        document.documentElement.dataset.theme = stored;
+      }
+    </script>
+    <style is:global set:html={distroVisibilityCss}></style>
+  </head>
+  <body
+    class="min-h-screen bg-bg px-2 pt-6 pb-8 font-mono text-[13px] leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:px-6 md:pt-10 md:pb-16 md:text-[14px]"
+  >
+    <main class="mx-auto max-w-[820px]">
+      <slot />
+    </main>
+    <DistroToggle />
+  </body>
 </html>

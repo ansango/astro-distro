@@ -1,0 +1,14 @@
+---
+import Prompt from "./prompt.astro";
+
+interface Props {
+  cmd: string;
+  class?: string;
+}
+
+---
+
+<Prompt cmd={Astro.props.cmd} class={Astro.props.class} />
+<pre class="my-2 overflow-x-auto text-[0.82rem] leading-normal whitespace-pre">
+    <slot/>
+</pre>

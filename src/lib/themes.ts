@@ -4,6 +4,8 @@
  * y el contenido que varía por distro.
  */
 export const distros = [
+	{ slug: "windows", os: "Windows 11", pkg: "winget" },
+	{ slug: "macos", os: "macOS Sonoma", pkg: "brew" },
 	{ slug: "arch", os: "Arch Linux (rolling)", pkg: "pacman" },
 	{ slug: "debian", os: "Debian 12 (bookworm)", pkg: "apt" },
 	{ slug: "ubuntu", os: "Ubuntu 24.04 LTS", pkg: "apt" },

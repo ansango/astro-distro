@@ -1,0 +1,32 @@
+---
+import Label from '../commons/label.astro';
+import Paragraph from '../commons/paragraph.astro';
+import Container from '../commons/container.astro';
+import Content from '../commons/content.astro';
+export interface Props {
+  status: {
+    branch: string;
+    since: string;
+    modified: number;
+    untracked: number;
+  };
+}
+
+const {
+  status = { branch: "main", since: "2019", modified: 3, untracked: 1 },
+} = Astro.props as Props;
+---
+
+<Container>
+  <Label>status</Label>
+  <Content>
+  <Paragraph>
+    <span class="font-medium text-accent">⎇ {status.branch}</span>
+    · since {status.since} ·
+    <span class="text-dim"
+      >+{status.modified}
+      modified · {status.untracked} untracked</span
+    >
+  </Paragraph>
+  </Content>
+</Container>

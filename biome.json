@@ -45,6 +45,11 @@
 	"overrides": [
 		{
 			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+			"formatter": {
+				"enabled": true,
+				"indentStyle": "space",
+				"indentSize": 2
+			},
 			"linter": {
 				"rules": {
 					"style": {
