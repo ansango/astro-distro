@@ -4,7 +4,7 @@ import Content from "../commons/content.astro";
 import Label from "../commons/label.astro";
 
 export interface Props {
-  usage?: {
+  usage: {
     label: string;
     percent: number;
     detail: string;
@@ -12,34 +12,15 @@ export interface Props {
   }[];
 }
 
-const {
-  usage = [
-    {
-      label: "editor",
-      percent: 100,
-      detail: "neovim 0.9.5",
-      note: "(lazyvim distro)",
-    },
-    { label: "terminal", percent: 60, detail: "kitty + zellij 0.39.1" },
-    { label: "shell", percent: 50, detail: "zsh + oh-my-zsh + starship" },
-    {
-      label: "cli tools",
-      percent: 50,
-      detail: "fzf · ripgrep · fd · bat · eza",
-    },
-    { label: "browser", percent: 20, detail: "firefox developer edition" },
-    { label: "notes", percent: 10, detail: "obsidian", note: "(syncthing)" },
-    { label: "music", percent: 10, detail: "spotify + spicetify" },
-    { label: "theme", percent: 50, detail: "catppuccin mocha" },
-    { label: "font", percent: 40, detail: "jetbrains mono" },
-  ],
-} = Astro.props as Props;
+const { usage } = Astro.props;
 ---
 
 <Container>
   <Label>CPU [daily usage]</Label>
   <Content>
-    <div class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1 ">
+    <div
+      class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1 "
+    >
       {usage.map(({ label, percent, detail, note }) => (
         <Fragment>
           <span class="col-span-3 sm:col-span-2">{label.padEnd(10)}</span>
@@ -52,6 +33,7 @@ const {
             </span>
             <span class="text-dim whitespace-pre"><span class="opacity-0">{percent < 100 ? "0" : ""}</span>{percent}%</span>
           </span>
+
           <span class="col-span-12 ml-2 md:ml-0 md:col-span-5 gap-2"><span class="line-clamp-1" >{detail} {note ? <span class="text-dim">{note}</span> : null}</span> </span>
         </Fragment>
       ))}

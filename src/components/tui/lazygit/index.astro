@@ -1,13 +1,16 @@
 ---
+import config from "../../../config.json";
 import Prompt from "../commons/prompt.astro";
 import Bio from "./bio.astro";
 import Paths from "./paths.astro";
 import Status from "./status.astro";
+
+const about = config.sections.about;
 ---
 
-<Prompt cmd="lazygit --view bio" class="mb-5" />
+<Prompt cmd={about.command} class="mb-5" />
 <div class="grid grid-cols-1 gap-5">
-  <Status />
-  <Bio />
-  <Paths />
+  <Status status={about.status} />
+  <Bio items={about.bio} />
+  <Paths paths={about.paths} />
 </div>

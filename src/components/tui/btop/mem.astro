@@ -4,7 +4,7 @@ import Content from "../commons/content.astro";
 import Label from "../commons/label.astro";
 
 export interface Props {
-  mem?: {
+  mem: {
     used: number;
     total: number;
     theme: string;
@@ -12,9 +12,7 @@ export interface Props {
   };
 }
 
-const {
-  mem = { used: 8.2, total: 32, theme: "catppuccin", themePercent: 100 },
-} = Astro.props as Props;
+const { mem } = Astro.props;
 
 const usedPercent = (mem.used / mem.total) * 100;
 ---

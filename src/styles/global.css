@@ -58,3 +58,17 @@
 *::-webkit-scrollbar-thumb:hover {
 	background-color: var(--color-dim);
 }
+
+
+h1 {
+	@apply text-lg;
+}
+
+h2 {
+	@apply text-base;
+}
+
+h3 {
+	@apply text-sm;
+}
+

@@ -1,15 +1,9 @@
 ---
 export interface Props {
-  hints?: { key: string; action: string }[];
+  hints: { key: string; action: string }[];
 }
 
-const {
-  hints = [
-    { key: "j/k", action: "next" },
-    { key: "enter", action: "open" },
-    { key: "q", action: "quit" },
-  ],
-} = Astro.props as Props;
+const { hints } = Astro.props;
 ---
 
 <div class="mt-2 text-[0.8rem] text-dim">

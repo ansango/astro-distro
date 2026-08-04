@@ -14,7 +14,6 @@
 		"memory": "8421MiB / 32128MiB",
 		"font": "Iosevka Term 14"
 	},
-
 	"systems": [
 		{
 			"slug": "arch",
@@ -666,5 +665,194 @@
 				"c3": "#7f5d00"
 			}
 		}
-	]
+	],
+	"sections": {
+		"about": {
+			"command": "lazygit --view bio",
+			"status": {
+				"branch": "main",
+				"since": "2019",
+				"modified": 3,
+				"untracked": 1
+			},
+			"bio": [
+				{
+					"icon": "M",
+					"text": "Construyo software limpio, minimalista y funcional"
+				},
+				{
+					"icon": "M",
+					"text": "Me obsesionan los detalles pequeños: tipografía"
+				},
+				{
+					"icon": "M",
+					"text": "Rendimiento, latencia, buenas APIs"
+				},
+				{
+					"icon": "??",
+					"text": "Construyo software limpio. Sí, uso Arch."
+				}
+			],
+			"paths": [
+				{
+					"name": "main",
+					"current": true
+				},
+				{
+					"name": "feature/webdev"
+				},
+				{
+					"name": "feature/security-research"
+				},
+				{
+					"name": "feature/ctf-writeups"
+				}
+			]
+		},
+		"projects": {
+			"command": "ranger /home/ansango/projects",
+			"root": "/home/ansango",
+			"projects": [
+				{
+					"name": "project.alpha",
+					"description": "CLI tool for automating dev workflows — npm, git, docker",
+					"repo": "github.com/ansango/alpha",
+					"stars": "★ 1.2k",
+					"updated": "updated 2 weeks ago",
+					"url": "https://github.com/ansango/alpha",
+					"size": "4.0K",
+					"date": "Jan 15"
+				},
+				{
+					"name": "project.beta",
+					"description": "Static site generator with markdown and MDX support",
+					"repo": "github.com/ansango/beta",
+					"stars": "★ 800",
+					"updated": "updated last month",
+					"url": "https://github.com/ansango/beta",
+					"size": "4.0K",
+					"date": "Feb 20"
+				},
+				{
+					"name": "project.gamma",
+					"description": "Terminal-based music player with last.fm scrobbling",
+					"repo": "github.com/ansango/gamma",
+					"stars": "★ 200",
+					"updated": "updated 3 months ago",
+					"url": "https://github.com/ansango/gamma",
+					"size": "4.0K",
+					"date": "Mar 10"
+				},
+				{
+					"name": "project.delta",
+					"description": "CLI for managing dotfiles across multiple machines",
+					"repo": "github.com/ansango/delta",
+					"stars": "★ 50",
+					"updated": "updated 6 months ago",
+					"url": "https://github.com/ansango/delta",
+					"size": "4.0K",
+					"date": "Apr 05"
+				}
+			]
+		},
+		"uses": {
+			"command": "btop --view stack — daily usage && hardware",
+			"cpu": {
+				"label": "CPU [daily usage]",
+				"usage": [
+					{
+						"label": "editor",
+						"percent": 100,
+						"detail": "neovim 0.9.5",
+						"note": "(lazyvim distro)"
+					},
+					{
+						"label": "terminal",
+						"percent": 60,
+						"detail": "kitty + zellij 0.39.1"
+					},
+					{
+						"label": "shell",
+						"percent": 50,
+						"detail": "zsh + oh-my-zsh + starship"
+					},
+					{
+						"label": "cli tools",
+						"percent": 50,
+						"detail": "fzf · ripgrep · fd · bat · eza"
+					},
+					{
+						"label": "browser",
+						"percent": 20,
+						"detail": "firefox developer edition"
+					},
+					{
+						"label": "notes",
+						"percent": 10,
+						"detail": "obsidian",
+						"note": "(syncthing)"
+					},
+					{
+						"label": "music",
+						"percent": 10,
+						"detail": "spotify + spicetify"
+					},
+					{
+						"label": "theme",
+						"percent": 50,
+						"detail": "catppuccin mocha"
+					},
+					{
+						"label": "font",
+						"percent": 40,
+						"detail": "jetbrains mono"
+					}
+				]
+			},
+			"memory": {
+				"used": 8.2,
+				"total": 32,
+				"theme": "catppuccin",
+				"themePercent": 100
+			},
+			"hardware": {
+				"label": "hardware",
+				"device": "thinkpad x1 carbon gen 11",
+				"ram": "32gb ram",
+				"os": "arch linux"
+			}
+		},
+		"contact": {
+			"command": "mutt -f ansango@dev",
+			"email": "ansango@dev",
+			"inbox": [
+				{
+					"from": "github.com",
+					"subject": "/ansango",
+					"date": "15 Aug 2014",
+					"href": "https://github.com/ansango"
+				},
+				{
+					"from": "ansango.com",
+					"subject": "hola@ansango.dev",
+					"date": "10 Jan 2019",
+					"href": "https://ansango.com"
+				}
+			],
+			"hints": [
+				{
+					"key": "j/k",
+					"action": "next"
+				},
+				{
+					"key": "enter",
+					"action": "open"
+				},
+				{
+					"key": "q",
+					"action": "quit"
+				}
+			]
+		}
+	}
 }

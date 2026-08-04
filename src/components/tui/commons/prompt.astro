@@ -8,6 +8,6 @@ interface Props {
 const { cmd, class: className } = Astro.props;
 ---
 
-<p class:list={["text-[0.85rem] text-dim", className ?? "mb-[0.6rem]"]}>
+<h3 class:list={["text-dim", className ?? "mb-[0.6rem]"]}>
   <span class="text-accent">$</span>{" "}{cmd}
-</p>
+</h3>

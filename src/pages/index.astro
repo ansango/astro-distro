@@ -40,14 +40,13 @@ const info: {
   title="ansango · arch"
   description="ansango — portfolio fastfetch style"
 >
-  <!-- ── fastfetch ─────────────────────────────────────── -->
   <div class="mb-10 flex flex-col items-start md:flex-row gap-6 md:gap-12">
     <DistroLogo />
-    <div class="text-[0.92rem] md:pt-[0.3rem]">
-      <div class="mb-[0.2rem] text-base font-medium text-accent">
-        ansango<span class="text-dim">@</span>dev
+    <div>
+      <div class="font-medium text-accent mb-1.5">
+        <h1 class="inline border-b border-dim pb-0.5">ansango<span class="text-dim">@</span>dev</h1>
       </div>
-      <div class="mb-2 tracking-tighter text-dim">────────────────</div>
+      
       {info.map(({ k, v, dim, perDistro }) => (
                     <div class="mb-[0.05rem] flex items-center gap-2">
                         <span class="inline-block font-medium text-accent min-w-[90px]">
@@ -67,25 +66,23 @@ const info: {
     </div>
   </div>
 
-  <!-- ── about ─────────────────────────────────────────── -->
+
   <section class="my-10">
     <SectionTitle title="about" />
     <Lazygit />
   </section>
 
-  <!-- ── projects ──────────────────────────────────────── -->
+
   <section class="my-10">
     <SectionTitle title="projects" />
     <Ranger />
   </section>
 
-  <!-- ── uses ──────────────────────────────────────────── -->
   <section class="my-10">
     <SectionTitle title="uses" />
     <Btop />
   </section>
-
-  <!-- ── contact ───────────────────────────────────────── -->
+  
   <section class="my-10">
     <SectionTitle title="contact" />
     <Mutt />

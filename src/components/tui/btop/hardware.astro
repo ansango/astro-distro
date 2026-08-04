@@ -4,16 +4,12 @@ import Content from "../commons/content.astro";
 import Label from "../commons/label.astro";
 
 export interface Props {
-  device?: string;
-  ram?: string;
-  os?: string;
+  device: string;
+  ram: string;
+  os: string;
 }
 
-const {
-  device = "thinkpad x1 carbon gen 11",
-  ram = "32gb ram",
-  os = "arch linux",
-} = Astro.props as Props;
+const { device, ram, os } = Astro.props;
 ---
 
 <Container>

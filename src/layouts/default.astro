@@ -19,12 +19,6 @@ const {
   lang = "es",
 } = Astro.props;
 
-/**
- * Visibilidad: oculta todo lo marcado con `data-distro` salvo el del tema
- * activo. `revert` en vez de `block` para que cada elemento recupere su
- * display de UA (los <pre> de los logos son block, los <span> del info
- * inline). Al resolverse en CSS no hay flash ni hace falta JS para pintar.
- */
 const distroVisibilityCss = [
   "[data-distro]{display:none}",
   ...themes.map(
@@ -32,10 +26,6 @@ const distroVisibilityCss = [
   ),
 ].join("");
 
-/**
- * Tokens de color por distro. Se generan en build time desde `src/config.json`
- * para tener una sola fuente de verdad.
- */
 const themeColorsCss = config.systems
   .map(
     (s) =>
@@ -70,14 +60,14 @@ const themeColorsCss = config.systems
     <style is:global set:html={themeColorsCss}></style>
   </head>
   <body
-    class="min-h-screen bg-bg p-6 font-mono text-xs leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:py-12 md:text-sm"
+    class="min-h-screen bg-bg p-6 font-mono text-sm sm:text-base leading-normal text-fg antialiased selection:bg-accent selection:text-bg md:py-12"
   >
     <main class="mx-auto max-w-3xl">
       <slot />
     </main>
 
     <!-- ── footer ────────────────────────────────────────── -->
-    <footer class="mx-auto max-w-3xl mt-10 text-[0.8rem] text-dim">
+    <footer class="mx-auto max-w-3xl mt-10 text-dim">
       <div class="flex flex-wrap justify-between gap-2 text-[0.85rem]">
         <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
           <span class="text-accent">●</span>
