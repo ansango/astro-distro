@@ -34,27 +34,25 @@ const {
     { label: "font", percent: 40, detail: "jetbrains mono" },
   ],
 } = Astro.props as Props;
-
-const BAR_WIDTH = 20;
-const bar = (percent: number) => {
-  const filled = Math.round((percent / 100) * BAR_WIDTH);
-  return "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled);
-};
 ---
 
 <Container>
   <Label>CPU [daily usage]</Label>
   <Content>
-    <div
-      class="font-mono grid grid-cols-[12ch_20ch_5ch_1fr_auto] items-center gap-x-3 gap-y-1"
-    >
+    <div class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1 ">
       {usage.map(({ label, percent, detail, note }) => (
         <Fragment>
-          <span>{label.padEnd(10)}</span>
-          <span class="text-accent">{bar(percent)}</span>
-          <span class="text-dim">{percent}%</span>
-          <span>{detail}</span>
-          {note ? <span class="text-dim">{note}</span> : <span />}
+          <span class="col-span-3 sm:col-span-2">{label.padEnd(10)}</span>
+          <span class="col-span-9 sm:col-span-10 md:col-span-5 flex items-center gap-2">
+            <span class="flex-1 h-4 overflow-hidden bg-accent/10">
+              <span
+                class="block h-full bg-accent"
+                style={`width: ${percent}%`}
+              />
+            </span>
+            <span class="text-dim whitespace-pre"><span class="opacity-0">{percent < 100 ? "0" : ""}</span>{percent}%</span>
+          </span>
+          <span class="col-span-12 ml-2 md:ml-0 md:col-span-5 gap-2"><span class="line-clamp-1" >{detail} {note ? <span class="text-dim">{note}</span> : null}</span> </span>
         </Fragment>
       ))}
     </div>

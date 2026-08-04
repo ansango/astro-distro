@@ -29,14 +29,11 @@ const {
 <Container>
   <Label>{project.name}</Label>
   <Content>
-    <div class="mb-2 text-[0.88rem]">{project.description}</div>
-    <div class="text-[0.78rem] text-dim">{project.repo}</div>
-    <div class="text-[0.78rem] text-dim">
-      {project.stars}
-      · {project.updated}
-    </div>
+    <div class="mb-2">{project.description}</div>
+    <div class=" text-dim">{project.repo}</div>
+    <div class=" text-dim">{project.stars}· {project.updated}</div>
     <a
-      class="mt-[0.4rem] inline-block text-[0.85rem] text-accent hover:underline"
+      class="mt-[0.4rem] inline-block text-accent hover:underline"
       href={project.url}
       target="_blank"
       rel="noopener"

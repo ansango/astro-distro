@@ -16,25 +16,38 @@ const {
   mem = { used: 8.2, total: 32, theme: "catppuccin", themePercent: 100 },
 } = Astro.props as Props;
 
-const BAR_WIDTH = 28;
-const bar = (percent: number) => {
-  const filled = Math.round((percent / 100) * BAR_WIDTH);
-  return "█".repeat(filled) + "░".repeat(BAR_WIDTH - filled);
-};
-
 const usedPercent = (mem.used / mem.total) * 100;
 ---
 
 <Container>
   <Label>MEM</Label>
   <Content>
-    <div
-      class="font-mono grid grid-cols-[12ch_1fr_auto_auto] items-center gap-x-3"
-    >
-      <span>RAM</span>
-      <span class="text-accent">{bar(usedPercent)}</span>
-      <span>{mem.used}/{mem.total} GB</span>
-      <span class="text-accent">{mem.theme} {mem.themePercent}%</span>
+    <div class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1">
+      <span class="col-span-3 sm:col-span-2">RAM</span>
+      <span
+        class="col-span-9 sm:col-span-10 md:col-span-5 flex items-center gap-2"
+      >
+        <span class="flex-1 h-4 bg-accent/10">
+          <span
+            class="block h-full bg-accent"
+            style={`width: ${usedPercent}%`}
+          />
+        </span>
+
+        <span class="text-dim whitespace-pre"
+          >{String(usedPercent.toFixed(0)).padStart(3)}%</span
+        >
+      </span>
+      <span
+        class="col-span-12 md:ml-0 md:col-span-5 text-accent whitespace-pre flex gap-2"
+      >
+        <span class="text-dim whitespace-pre">{mem.used}/{mem.total} GB</span>
+        {mem.theme}
+        <span class="text-dim"
+          >
+          {mem.themePercent}%</span
+        >
+      </span>
     </div>
   </Content>
 </Container>
