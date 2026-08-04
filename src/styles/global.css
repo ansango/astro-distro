@@ -1,1 +1,30 @@
 @import "tailwindcss";
+@import "./themes.css";
+
+/* ─────────────────────────────────────────────────────────────
+   Tokens base (= tema `arch`).
+   Los `[data-theme]` de themes.css sobrescriben estos valores:
+   viven fuera de capa, así que ganan siempre a `@layer theme`.
+
+   `static` fuerza a Tailwind a emitir TODAS las variables aunque
+   no se usen todavía — necesario para que los temas puedan
+   sobrescribirlas sin haber usado antes la utilidad.
+   ───────────────────────────────────────────────────────────── */
+@theme static {
+	--font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+	/* superficies */
+	--color-bg: #08090b;
+	--color-panel: #0e1014;
+	--color-border: #1a1d22;
+
+	/* texto */
+	--color-fg: #d8d8d8;
+	--color-dim: #5e6470;
+	--color-accent: #1793d1;
+
+	/* colores del logo ascii (ansi 1-3) */
+	--color-c1: #1793d1;
+	--color-c2: #7eb8d8;
+	--color-c3: #0d5a85;
+}

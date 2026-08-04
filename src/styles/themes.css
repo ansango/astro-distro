@@ -1,0 +1,93 @@
+/* ─────────────────────────────────────────────────────────────
+   data-themes · una paleta por distro.
+
+   Cada bloque sobrescribe los tokens declarados en global.css.
+   Se aplican con `<html data-theme="...">` (prop `theme` del layout).
+
+   Para añadir un tema nuevo basta con copiar un bloque y cambiar
+   los 9 valores — no hay que tocar ningún componente.
+   ───────────────────────────────────────────────────────────── */
+
+[data-theme="arch"] {
+	--color-bg: #08090b;
+	--color-panel: #0e1014;
+	--color-border: #1a1d22;
+	--color-fg: #d8d8d8;
+	--color-dim: #5e6470;
+	--color-accent: #1793d1;
+	--color-c1: #1793d1;
+	--color-c2: #7eb8d8;
+	--color-c3: #0d5a85;
+}
+
+[data-theme="debian"] {
+	--color-bg: #0b0709;
+	--color-panel: #140d11;
+	--color-border: #241419;
+	--color-fg: #d8d8d8;
+	--color-dim: #6b5f66;
+	--color-accent: #d70a53;
+	--color-c1: #d70a53;
+	--color-c2: #e8608f;
+	--color-c3: #8c0736;
+}
+
+[data-theme="ubuntu"] {
+	--color-bg: #0b0806;
+	--color-panel: #150f0b;
+	--color-border: #261a13;
+	--color-fg: #d8d8d8;
+	--color-dim: #6f6259;
+	--color-accent: #e95420;
+	--color-c1: #e95420;
+	--color-c2: #f3a68b;
+	--color-c3: #772953;
+}
+
+[data-theme="kali"] {
+	--color-bg: #07080b;
+	--color-panel: #0d1016;
+	--color-border: #171c26;
+	--color-fg: #d8d8d8;
+	--color-dim: #5f6672;
+	--color-accent: #367bf0;
+	--color-c1: #367bf0;
+	--color-c2: #8fb4f7;
+	--color-c3: #1b4590;
+}
+
+[data-theme="fedora"] {
+	--color-bg: #070a0d;
+	--color-panel: #0d1218;
+	--color-border: #161e28;
+	--color-fg: #d8d8d8;
+	--color-dim: #5e6773;
+	--color-accent: #51a2da;
+	--color-c1: #51a2da;
+	--color-c2: #a3cded;
+	--color-c3: #294172;
+}
+
+[data-theme="opensuse"] {
+	--color-bg: #080a07;
+	--color-panel: #0e120c;
+	--color-border: #1a2015;
+	--color-fg: #d8d8d8;
+	--color-dim: #626b5b;
+	--color-accent: #73ba25;
+	--color-c1: #73ba25;
+	--color-c2: #aad97a;
+	--color-c3: #3f6b0f;
+}
+
+[data-theme="alpine"] {
+	--color-bg: #07090b;
+	--color-panel: #0d1116;
+	--color-border: #161d24;
+	--color-fg: #d8d8d8;
+	--color-dim: #5e6873;
+	--color-accent: #3fa9e0;
+	--color-c1: #3fa9e0;
+	--color-c2: #9ed4f0;
+	--color-c3: #0d597f;
+}

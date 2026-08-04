@@ -1,17 +1,92 @@
 ---
 interface Props {
-    small: string;
-    large: string;
+	small: string;
+	large: string;
+	class?: string;
+	"data-distro"?: string;
 }
 
-const { small, large } = Astro.props;
+const { small, large, class: className, ...rest } = Astro.props;
+
+/**
+ * Los ascii de fastfetch marcan color con `$1`..`$9`, y `$$` es un `$` literal.
+ *
+ * Dos detalles de `src/logo/logo.c` que hay que respetar para que el coloreado
+ * salga como en la terminal:
+ *   - el color arranca en `$1`, así que el texto sin marcar NO es el color de
+ *     texto normal sino c1;
+ *   - el color arrastra de una línea a la siguiente (`carryColor`), no se
+ *     reinicia en cada salto.
+ */
+
+/**
+ * Literales a propósito: Tailwind escanea los ficheros como texto plano, así
+ * que una clase construida (`text-c${i}`) no llega a generarse nunca.
+ */
+const COLOR_CLASSES = ["text-c1", "text-c2", "text-c3"] as const;
+
+const escapeHtml = (text: string) =>
+	text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+function toHtml(source: string): string {
+	let color = 1;
+
+	return source
+		.replace(/\r\n/g, "\n")
+		.replace(/^\n+|\n+$/g, "")
+		.split("\n")
+		.map((line) => {
+			let html = "";
+			let buffer = "";
+
+			const flush = () => {
+				if (!buffer) return;
+				const index = Math.min(color, COLOR_CLASSES.length) - 1;
+				html += `<span class="${COLOR_CLASSES[index]}">${escapeHtml(buffer)}</span>`;
+				buffer = "";
+			};
+
+			for (let i = 0; i < line.length; i++) {
+				if (line[i] !== "$" || i + 1 >= line.length) {
+					buffer += line[i];
+					continue;
+				}
+
+				const marker = line[++i];
+				if (marker === "$") {
+					buffer += "$";
+					continue;
+				}
+
+				const index = Number(marker);
+				if (Number.isInteger(index) && index >= 1 && index <= 9) {
+					flush();
+					color = index;
+					continue;
+				}
+
+				buffer += `$${marker}`;
+			}
+
+			flush();
+			return html;
+		})
+		.join("\n");
+}
+
+/**
+ * El contenido entra entero por `set:html` en lugar de como etiquetas en la
+ * plantilla: dentro de un `<pre>` los saltos y tabuladores del código fuente se
+ * renderizan tal cual, y el formateador vuelve a indentar las etiquetas cada
+ * vez que se ejecuta. Como string no hay whitespace que se cuele.
+ */
+const html =
+	`<span class="text-[0.95rem] lg:hidden">${toHtml(small)}</span>` +
+	`<span class="hidden text-[0.75rem] lg:inline">${toHtml(large)}</span>`;
 ---
 
-<pre>
-                    <span class="lg:hidden">
-{small}
-</span>
-<span class="hidden lg:block">
-{large}
-</span>
-                </pre>
+<pre
+	{...rest}
+	class:list={["m-0 p-0 leading-[1.05] whitespace-pre", className]}
+	set:html={html}
+/>

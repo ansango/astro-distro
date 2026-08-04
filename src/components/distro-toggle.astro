@@ -1,0 +1,50 @@
+---
+import { themes } from "../lib/themes";
+---
+
+<div
+	class="fixed right-2 bottom-2 z-50 flex max-w-[calc(100vw-1rem)] flex-wrap justify-end gap-1 border border-border bg-panel p-1 text-[0.7rem]"
+>
+	{
+		themes.map((theme) => (
+			<button
+				type="button"
+				data-theme-option={theme}
+				aria-pressed="false"
+				class="cursor-pointer border border-transparent px-2 py-1 text-dim hover:text-accent aria-pressed:border-border aria-pressed:text-accent"
+			>
+				{theme}
+			</button>
+		))
+	}
+</div>
+
+<script>
+	import { DEFAULT_THEME, STORAGE_KEY, themes } from "../lib/themes";
+
+	const root = document.documentElement;
+	const buttons = document.querySelectorAll<HTMLButtonElement>(
+		"[data-theme-option]",
+	);
+
+	const isTheme = (value: string | null): value is (typeof themes)[number] =>
+		!!value && (themes as readonly string[]).includes(value);
+
+	function apply(theme: string) {
+		root.dataset.theme = theme;
+		localStorage.setItem(STORAGE_KEY, theme);
+
+		for (const button of buttons) {
+			const pressed = button.dataset.themeOption === theme;
+			button.setAttribute("aria-pressed", String(pressed));
+		}
+	}
+
+	for (const button of buttons) {
+		const theme = button.dataset.themeOption;
+		if (theme) button.addEventListener("click", () => apply(theme));
+	}
+
+	const stored = localStorage.getItem(STORAGE_KEY);
+	apply(isTheme(stored) ? stored : (root.dataset.theme ?? DEFAULT_THEME));
+</script>

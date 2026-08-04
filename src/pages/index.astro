@@ -1,196 +1,196 @@
 ---
+import DistroLogo from "../components/logos/distro-logo.astro";
+import Prompt from "../components/prompt.astro";
+import SectionTitle from "../components/section-title.astro";
 import Layout from "../layouts/default.astro";
+import { type Distro, distros } from "../lib/themes";
+
+/** `perDistro` marca las filas cuyo valor cambia con la distro activa */
+const info: {
+    k: string;
+    v?: string;
+    dim?: boolean;
+    perDistro?: (distro: Distro) => string;
+}[] = [
+    { k: "OS", perDistro: (distro) => distro.os },
+    { k: "Host", v: "ThinkPad X1 Carbon Gen 11" },
+    { k: "Kernel", v: "6.7.4-arch1-1" },
+    { k: "Uptime", v: "since 2019 (btw)" },
+    { k: "Packages", perDistro: (distro) => `4 (${distro.pkg})` },
+    { k: "Shell", v: "zsh 5.9" },
+    { k: "Resolution", v: "1920x1080" },
+    { k: "DE", v: "N/A", dim: true },
+    { k: "WM", v: "i3" },
+    { k: "Theme", v: "catppuccin-mocha" },
+    { k: "Terminal", v: "kitty + zellij" },
+    { k: "CPU", v: "Intel i7-1165G7 (8) @ 4.7GHz" },
+    { k: "GPU", v: "Intel Iris Xe" },
+    { k: "Memory", v: "8421MiB / 32128MiB" },
+];
 ---
 
-<Layout>
-    <html lang="es">
-        <head>
-            <meta charset="UTF-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
-            <title>ansango · pick your flavor</title>
-            <meta
-                name="description"
-                content="ansango — portfolio estilo terminal"
-            />
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link
-                rel="preconnect"
-                href="https://fonts.gstatic.com"
-                crossorigin
-            />
-            <link
-                href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap"
-                rel="stylesheet"
-            />
-            <style>
-                *,
-                *::before,
-                *::after {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                }
+<Layout
+    title="ansango · arch"
+    description="ansango — portfolio fastfetch style"
+>
+    <!-- ── fastfetch ─────────────────────────────────────── -->
+    <div
+        class="mb-10 flex flex-col items-start gap-[0.8rem] md:flex-row md:gap-12"
+    >
+        <DistroLogo />
+        <div class="text-[0.92rem] md:pt-[0.3rem]">
+            <div class="mb-[0.2rem] text-base font-medium text-accent">
+                ansango<span class="text-dim">@</span>dev
+            </div>
+            <div class="mb-2 tracking-[-0.05em] text-dim">────────────────</div>
+            {
+                info.map(({ k, v, dim, perDistro }) => (
+                    <div class="mb-[0.05rem]">
+                        <span class="inline-block min-w-[70px] font-medium text-accent md:min-w-[90px]">
+                            {k}
+                        </span>
+                        {perDistro ? (
+                            distros.map((distro) => (
+                                <span data-distro={distro.slug}>
+                                    {perDistro(distro)}
+                                </span>
+                            ))
+                        ) : (
+                            <span class:list={[dim && "text-dim"]}>{v}</span>
+                        )}
+                    </div>
+                ))
+            }
+        </div>
+    </div>
 
-                :root {
-                    --bg: #0a0a0c;
-                    --fg: #e0e0e0;
-                    --dim: #6a6a6a;
-                    --accent: #c8c8c8;
-                    --border: #222226;
-                }
-
-                html {
-                    scroll-behavior: smooth;
-                }
-
-                body {
-                    background: var(--bg);
-                    color: var(--fg);
-                    font-family:
-                        "JetBrains Mono", "Fira Code", "Courier New", monospace;
-                    font-size: 14px;
-                    line-height: 1.7;
-                    min-height: 100vh;
-                    -webkit-font-smoothing: antialiased;
-                }
-
-                main {
-                    max-width: 880px;
-                    margin: 0 auto;
-                    padding: 3rem 1.5rem 4rem;
-                }
-
-                pre.picker {
-                    font-family: inherit;
-                    color: var(--fg);
-                    font-size: 0.95rem;
-                    line-height: 1.5;
-                    white-space: pre;
-                    overflow-x: auto;
-                    margin: 0 0 2rem;
-                }
-                pre.picker .acc {
-                    color: var(--accent);
-                    font-weight: 500;
-                }
-                pre.picker .dim {
-                    color: var(--dim);
-                }
-                pre.picker a {
-                    color: var(--accent);
-                    text-decoration: none;
-                    font-weight: 500;
-                }
-                pre.picker a:hover {
-                    text-decoration: underline;
-                }
-                pre.picker .desc {
-                    color: var(--dim);
-                }
-                pre.picker .tag-debian {
-                    color: #d70a53;
-                }
-                pre.picker .tag-ubuntu {
-                    color: #e95420;
-                }
-                pre.picker .tag-arch {
-                    color: #1793d1;
-                }
-                pre.picker .tag-fedora {
-                    color: #3c6eb4;
-                }
-                pre.picker .tag-alpine {
-                    color: #0d597f;
-                }
-                pre.picker .tag-suse {
-                    color: #73ba25;
-                }
-                pre.picker .tag-macos {
-                    color: #c0c0c0;
-                }
-
-                .hint {
-                    margin-top: 1.5rem;
-                    padding-top: 1.5rem;
-                    border-top: 1px dashed var(--border);
-                    color: var(--dim);
-                    font-size: 0.85rem;
-                }
-                .hint code {
-                    color: var(--fg);
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 0.1rem 0.4rem;
-                    border-radius: 3px;
-                }
-
-                footer {
-                    margin-top: 2.5rem;
-                    padding-top: 1.2rem;
-                    border-top: 1px dashed var(--border);
-                    color: var(--dim);
-                    font-size: 0.8rem;
-                    display: flex;
-                    justify-content: space-between;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                }
-                footer span::before {
-                    content: "~ ";
-                    color: var(--accent);
-                }
-
-                @media (max-width: 600px) {
-                    main {
-                        padding: 1.2rem 0.5rem 2rem;
-                    }
-                    pre.picker {
-                        font-size: 0.55rem;
-                    }
-                }
-
-                ::selection {
-                    background: var(--accent);
-                    color: var(--bg);
-                }
-            </style>
-        </head>
-        <body>
-            <main>
-                <pre
-                    class="picker">
-
-
-                  <span class="dim">~ pick your flavor ~</span>
-                                                            <span class="dim">*</span>
-
-  <span class="acc">~</span> <a href="debian.html">debian</a>          <span class="tag-debian">▰▰▰</span>  <span class="desc">rojo · bookworm · standard</span>
-  <span class="acc">~</span> <a href="ubuntu.html">ubuntu</a>          <span class="tag-ubuntu">▰▰▰</span>  <span class="desc">naranja · noble · big</span>
-  <span class="acc">~</span> <a href="arch.html">arch</a>            <span class="tag-arch">▰▰▰</span>  <span class="desc">azul · rolling · slant</span>
-  <span class="acc">~</span> <a href="fedora.html">fedora</a>          <span class="tag-fedora">▰▰▰</span>  <span class="desc">azul · 40 · ansi shadow</span>
-  <span class="acc">~</span> <a href="alpine.html">alpine</a>          <span class="tag-alpine">▰▰▰</span>  <span class="desc">azul oscuro · edge · small</span>
-  <span class="acc">~</span> <a href="opensuse.html">opensuse</a>        <span class="tag-suse">▰▰▰</span>  <span class="desc">verde · tumbleweed · speed</span>
-  <span class="acc">~</span> <a href="macos.html">macos</a>           <span class="tag-macos">▰▰▰</span>  <span class="desc">apple · sonoma · larry 3d</span>
+    <!-- ── about ─────────────────────────────────────────── -->
+    <section class="my-10">
+        <SectionTitle title="about" />
+        <Prompt cmd="lazygit --view bio" />
+        <pre
+            class="my-2 overflow-x-auto text-[0.82rem] leading-normal whitespace-pre">
+<span class="text-dim">┌─ status ──────────────────────────────────────────────────────────────────┐</span>
+│ <span class="font-medium text-accent">⎇ main</span>  ·  since 2019  ·  <span class="text-dim">+3 modified · 1 untracked</span>                          │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+<span class="text-dim">┌─ bio (modified) ─────────────────────────────────────────────────────────┐</span>
+│  <span class="font-medium text-accent">M</span>  Construyo software limpio, minimalista y funcional                    │
+│  <span class="font-medium text-accent">M</span>  Me obsesionan los detalles pequeños: tipografía                        │
+│  <span class="font-medium text-accent">M</span>  Rendimiento, latencia, buenas APIs                                    │
+│  <span class="text-dim">??</span> Construyo software limpio. Sí, uso Arch.                     │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+<span class="text-dim">┌─ paths (local) ──────────────────────────────────────────────────────────┐</span>
+│  <span class="font-medium text-accent">* main</span>                                                              │
+│    feature/webdev                                                           │
+│    feature/security-research                                                │
+│    feature/ctf-writeups                                                     │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
 </pre>
+    </section>
 
-                <div class="hint">
-                    <strong style="color: var(--fg);">v3:</strong> cabecera con <code
-                        >ansango</code
-                    > en ASCII art font (<strong>ANSI Shadow</strong>, estilo
-                    patorjk) + drip effect y nombre de la distro abajo. Sin
-                    logos raros. Las secciones (<code>~ about</code>, <code
-                        >~ projects</code
-                    >, <code>~ contact</code>), símbolos <code>~</code>, y gama
-                    de colores por distro se mantienen.
+    <!-- ── projects ──────────────────────────────────────── -->
+    <section class="my-10">
+        <SectionTitle title="projects" />
+        <Prompt cmd="ranger /home/ansango/projects" />
+        <div
+            class="my-2 grid grid-cols-1 border border-border bg-panel md:grid-cols-2"
+        >
+            <pre
+                class="m-0 overflow-x-auto border-b border-border p-4 text-[0.82rem] leading-[1.55] whitespace-pre md:border-r md:border-b-0">
+<span class="text-dim">/home/ansango</span>
+└── projects/  <span class="text-dim">(4 items, 96K total)</span>
+    ┌── <span class="text-accent">project.alpha</span> <span class="text-dim">  4.0K</span> <span class="text-dim">Jan 15</span>
+    ├── project.beta    <span class="text-dim">  4.0K</span> <span class="text-dim">Feb 20</span>
+    ├── project.gamma   <span class="text-dim">  4.0K</span> <span class="text-dim">Mar 10</span>
+    └── project.delta   <span class="text-dim">  4.0K</span> <span class="text-dim">Apr 05</span>
+</pre>
+            <div class="p-4">
+                <div class="mb-[0.3rem] text-base font-medium text-accent">
+                    project.alpha
                 </div>
+                <div class="mb-2 text-[0.88rem]">
+                    CLI tool for automating dev workflows — npm, git, docker
+                </div>
+                <div class="text-[0.78rem] text-dim">
+                    github.com/ansango/alpha
+                </div>
+                <div class="text-[0.78rem] text-dim">
+                    ★ 1.2k · updated 2 weeks ago
+                </div>
+                <a
+                    class="mt-[0.4rem] inline-block text-[0.85rem] text-accent hover:underline"
+                    href="https://github.com/ansango/alpha"
+                    target="_blank"
+                    rel="noopener">→ open in browser</a
+                >
+            </div>
+        </div>
+    </section>
 
-                <footer>
-                    <span>uptime: since 2019</span>
-                    <span>7 flavors · v3 · ansango font · no distro art</span>
-                </footer>
-            </main>
-        </body>
-    </html>
+    <!-- ── uses ──────────────────────────────────────────── -->
+    <section class="my-10">
+        <SectionTitle title="uses" />
+        <Prompt
+            cmd="btop --view stack — daily usage & hardware"
+            class="mb-[0.4rem]"
+        />
+        <pre
+            class="my-2 overflow-x-auto text-[0.7rem] leading-normal whitespace-pre md:text-[0.82rem]">
+<span class="text-dim">┌─ CPU [daily usage] ───────────────────────────────────────────────────────┐</span>
+│ <span>editor      </span> <span class="text-accent">████████████████████</span> <span class="text-dim">100%</span>  <span>neovim 0.9.5</span>           <span class="text-dim">(lazyvim distro)</span> │
+│ <span>terminal    </span> <span class="text-accent/70">██████████████░░░░░░</span> <span class="text-dim"> 60%</span>  <span>kitty + zellij 0.39.1</span>                  │
+│ <span>shell       </span> <span class="text-accent/60">██████████░░░░░░░░░░</span> <span class="text-dim"> 50%</span>  <span>zsh + oh-my-zsh + starship</span>             │
+│ <span>cli tools   </span> <span class="text-accent/60">██████████░░░░░░░░░░</span> <span class="text-dim"> 50%</span>  <span>fzf · ripgrep · fd · bat · eza</span>          │
+│ <span>browser     </span> <span class="text-accent/30">████░░░░░░░░░░░░░░░░</span> <span class="text-dim"> 20%</span>  <span>firefox developer edition</span>               │
+│ <span>notes       </span> <span class="text-accent/20">██░░░░░░░░░░░░░░░░░░</span> <span class="text-dim"> 10%</span>  <span>obsidian</span>                <span class="text-dim">(syncthing)</span>   │
+│ <span>music       </span> <span class="text-accent/20">██░░░░░░░░░░░░░░░░░░</span> <span class="text-dim"> 10%</span>  <span>spotify + spicetify</span>                     │
+│ <span>theme       </span> <span class="text-accent/60">██████████░░░░░░░░░░</span> <span class="text-dim"> 50%</span>  <span>catppuccin mocha</span>                        │
+│ <span>font        </span> <span class="text-accent/50">████████░░░░░░░░░░░░</span> <span class="text-dim"> 40%</span>  <span>jetbrains mono</span>                          │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+
+<span class="text-dim">┌─ MEM ─────────────────────────────────────────────────────────────────────┐</span>
+│ <span>RAM         </span> <span class="text-accent">████████░░░░░░░░░░░░░░░░░░░</span> 8.2/32 GB  <span class="text-accent">catppuccin 100%</span>          │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+
+<span class="text-dim">┌─ hardware ────────────────────────────────────────────────────────────────┐</span>
+│ thinkpad x1 carbon gen 11  ·  32gb ram  ·  <span class="text-accent">arch linux</span>           │
+<span class="text-dim">└──────────────────────────────────────────────────────────────────────────┘</span>
+</pre>
+    </section>
+
+    <!-- ── contact ───────────────────────────────────────── -->
+    <section class="my-10">
+        <SectionTitle title="contact" />
+        <Prompt cmd="mutt -f ansango@dev" />
+        <pre
+            class="my-2 overflow-x-auto text-[0.82rem] leading-[1.6] whitespace-pre">
+  <span class="text-dim">From</span>             <span class="text-dim">Subject</span>                          <span class="text-dim">Date</span>
+<span class="font-medium text-accent">&gt;</span> <span>github.com</span>     /ansango                             <span class="text-dim">15 Aug 2014</span>
+  <span>twitter.com</span>    @ansango                             <span class="text-dim">22 Mar 2015</span>
+  <span>ansango.dev</span>    hola@ansango.dev                     <span class="text-dim">10 Jan 2019</span>
+</pre>
+        <div class="mt-2 text-[0.8rem] text-dim">
+            j/k next · <span class="text-accent">enter</span> open · q quit
+        </div>
+    </section>
+
+    <!-- ── footer ────────────────────────────────────────── -->
+    <footer class="mt-10 text-[0.8rem] text-dim">
+        <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
+            <span class="text-accent">●</span>
+            <span>session closed</span>
+            <span class="text-border">·</span>
+            <span>0 errors</span>
+            <span class="text-border">·</span>
+            <span>0 warnings</span>
+            <span class="text-border">·</span>
+            <span>uptime 5y</span>
+            <span class="text-border">·</span>
+            <span class="text-fg">arch linux · rolling · btw</span>
+            <span class="text-border">·</span>
+            <a href="mailto:hola@ansango.dev" class="text-accent"
+                >hola@ansango.dev</a
+            >
+        </div>
+    </footer>
 </Layout>

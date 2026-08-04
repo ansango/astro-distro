@@ -1,0 +1,22 @@
+---
+import allDistros from "./index";
+import Logo from "./logo.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<!-- los 7 logos se renderizan en build; el visible lo decide el data-theme del <html> -->
+{
+	allDistros.map((distro) => (
+		<Logo
+			data-distro={distro.slug}
+			small={distro.logos.small}
+			large={distro.logos.large}
+			class={className}
+		/>
+	))
+}
