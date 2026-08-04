@@ -1,0 +1,17 @@
+---
+interface Props {
+    small: string;
+    large: string;
+}
+
+const { small, large } = Astro.props;
+---
+
+<pre>
+                    <span class="lg:hidden">
+{small}
+</span>
+<span class="hidden lg:block">
+{large}
+</span>
+                </pre>
