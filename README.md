@@ -13,7 +13,7 @@ Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML
 <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
   <img src="./docs/screenshots/themes/theme-debian.png" width="49%" alt="debian theme" />
   <img src="./docs/screenshots/themes/theme-arch.png" width="49%" alt="arch theme" />
-  <img src="./docs/screenshots/themes/theme-ubuntu.png" width="49%" alt="ubuntu theme" />
+  <img src="./docs/screenshots/themes/theme-linuxmint.png" width="49%" alt="linuxmint theme" />
   <img src="./docs/screenshots/themes/theme-kali.png" width="49%" alt="kali theme" />
 </div>
 

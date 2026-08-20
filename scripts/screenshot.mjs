@@ -17,7 +17,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.SCREENSHOT_BASE ?? "http://127.0.0.1:4321";
-const THEMES = ["debian", "arch", "ubuntu", "kali"];
+const THEMES = ["debian", "arch", "linuxmint", "kali"];
 const VIEWPORT = { width: 1280, height: 720 };
 
 const OUT = "docs/screenshots";
