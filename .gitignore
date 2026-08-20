@@ -17,6 +17,12 @@ pnpm-debug.log*
 .env
 .env.production
 
+# generated from src/data.yml
+src/config.json
+
+# local cache for sync script (GitHub API responses)
+.cache/
+
 # macOS-specific files
 .DS_Store
 

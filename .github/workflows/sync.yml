@@ -6,15 +6,13 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - src/queue.yml
+      - src/data.yml
     branches:
       - main
 
 jobs:
-  sync:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -22,17 +20,10 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Sync from queue
-        run: bun run sync
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
 
-      - name: Commit and push changes
-        run: |
-          if git diff --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-          git config user.name "ansango"
-          git config user.email "ansango@users.noreply.github.com"
-          git add src/config.json
-          git commit -m "chore: sync from queue [skip ci]"
-          git push
+      - name: Build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bun run build

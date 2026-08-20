@@ -106,6 +106,8 @@ export async function fetchRepo(
 		"User-Agent": "astro-distro-sync",
 		"X-GitHub-Api-Version": "2022-11-28",
 	};
+	const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+	if (token) headers.Authorization = `Bearer ${token}`;
 
 	const res = await fetch(url, { headers });
 	if (!res.ok) {

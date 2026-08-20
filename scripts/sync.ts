@@ -1,30 +1,47 @@
 #!/usr/bin/env bun
 /**
- * Reconcile src/config.json against src/queue.yml.
- * - Projects: every URL in queue.yml is fetched from GitHub. Existing entries are
- *   refreshed in place; missing ones are appended; entries no longer in the queue are dropped.
- * - `current`: rewritten from YAML (slug + host fields + booted_at).
- * - `sections.about.status`: rewritten from YAML verbatim.
- * - queue.yml is left untouched (it is the source of truth).
+ * Build src/config.json from src/data.yml + GitHub project metadata.
+ *
+ * - data.yml is the source of truth (manual config + projects URLs).
+ * - Each project URL is fetched from GitHub; existing entries are refreshed,
+ *   missing ones are appended, entries no longer in the queue are dropped.
+ * - GitHub responses are cached in `.cache/sync.json` with a TTL (default 1h).
+ * - If data.yml is older than config.json and the cache is fresh, sync is skipped.
+ * - Set GH_TOKEN (or GITHUB_TOKEN) to raise the API rate limit from 60/h to 5000/h.
+ * - data.yml is left untouched.
+ *
  * Use:
  *   bun run scripts/sync.ts
+ *   SYNC_TTL=0 bun run scripts/sync.ts   # always refetch (ignore cache)
+ *   SYNC_FORCE=1 bun run scripts/sync.ts  # always run (ignore skip check)
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	mkdirSync,
+	readFileSync,
+	statSync,
+	writeFileSync,
+} from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { load as parseYaml } from "js-yaml";
 import {
 	buildProjectFromUrl,
 	fetchRepo,
-	parseRepoUrl,
+	type GHRepo,
 	type Project,
+	parseRepoUrl,
 } from "./lib/project.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const CONFIG_PATH = resolve(ROOT, "src/config.json");
-const QUEUE_PATH = resolve(ROOT, "src/queue.yml");
+const DATA_PATH = resolve(ROOT, "src/data.yml");
+const CACHE_PATH = resolve(ROOT, ".cache/sync.json");
 
-interface Queue {
+const DEFAULT_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+interface Data {
 	current: string;
 	booted_at: string;
 	host: {
@@ -35,76 +52,137 @@ interface Queue {
 		resolution: string;
 	};
 	about: {
-		status: {
-			branch: string;
-			since: number | string;
-			ahead: number;
-			behind: number;
-			modified: number;
-			untracked: number;
-		};
+		command: string;
+		status: Record<string, unknown>;
+		bio: { icon: string; text: string }[];
+		paths: { name: string; current?: boolean }[];
+	};
+	systems: Record<string, unknown>[];
+	uses: {
+		command: string;
+		cpu: Record<string, unknown>;
+		memory: Record<string, unknown>;
+		hardware: Record<string, unknown>;
+		peripherals: Record<string, unknown>;
+	};
+	contact: {
+		command: string;
+		email: string;
+		inbox: Record<string, unknown>[];
+		hints: Record<string, unknown>[];
+	};
+	projects_ui: {
+		command: string;
+		root: string;
 	};
 	projects: string[];
 }
 
-interface Config {
-	current: Record<string, unknown>;
-	sections: {
-		about: {
-			command: string;
-			status: Record<string, unknown>;
-			bio: unknown[];
-			paths: unknown[];
-		};
-		projects: {
-			command: string;
-			root: string;
-			projects: Project[];
-		};
-	};
+interface CacheEntry {
+	fetched_at: number;
+	data: GHRepo;
 }
 
-function readQueue(): Queue {
-	const raw = readFileSync(QUEUE_PATH, "utf-8");
-	const parsed = Bun.YAML.parse(raw) as Queue;
+interface Cache {
+	entries: Record<string, CacheEntry>;
+}
+
+function readData(): Data {
+	const raw = readFileSync(DATA_PATH, "utf-8");
+	const parsed = parseYaml(raw) as Data;
 	if (!parsed.projects || !Array.isArray(parsed.projects)) {
-		console.error("✗ queue.yml must have a `projects` array");
+		console.error("✗ data.yml must have a `projects` array");
 		process.exit(1);
 	}
 	return parsed;
 }
 
-async function main() {
-	const queue = readQueue();
-	const config = JSON.parse(readFileSync(CONFIG_PATH, "utf-8")) as Config;
-	const projects = config.sections.projects.projects;
-	const byUrl = new Map(projects.map((p) => [p.url, p] as const));
+function readCache(): Cache {
+	try {
+		return JSON.parse(readFileSync(CACHE_PATH, "utf-8")) as Cache;
+	} catch {
+		return { entries: {} };
+	}
+}
+
+function writeCache(cache: Cache): void {
+	mkdirSync(dirname(CACHE_PATH), { recursive: true });
+	writeFileSync(CACHE_PATH, `${JSON.stringify(cache, null, "\t")}\n`);
+}
+
+async function fetchRepoCached(
+	cache: Cache,
+	url: string,
+	owner: string,
+	repo: string,
+	ttlMs: number,
+): Promise<GHRepo | null> {
+	const cached = cache.entries[url];
+	if (cached && ttlMs > 0 && Date.now() - cached.fetched_at < ttlMs) {
+		return cached.data;
+	}
+	const fresh = await fetchRepo(owner, repo);
+	if (fresh) {
+		cache.entries[url] = { fetched_at: Date.now(), data: fresh };
+	}
+	return fresh;
+}
+
+async function reconcileProjects(
+	queueUrls: string[],
+	ttlMs: number,
+): Promise<{
+	projects: Project[];
+	added: number;
+	refreshed: number;
+	skipped: number;
+	removed: number;
+	cache: Cache;
+}> {
+	const cache = readCache();
+	let existing: Project[] = [];
+	if (existsSync(CONFIG_PATH)) {
+		try {
+			existing =
+				(JSON.parse(readFileSync(CONFIG_PATH, "utf-8")).sections?.projects
+					?.projects as Project[] | undefined) ?? [];
+		} catch {
+			existing = [];
+		}
+	}
+	const byUrl = new Map(existing.map((p) => [p.url, p] as const));
 
 	const next: Project[] = [];
 	let added = 0;
 	let refreshed = 0;
 	let skipped = 0;
 
-	for (const url of queue.projects) {
-		const existing = byUrl.get(url);
+	for (const url of queueUrls) {
+		const prev = byUrl.get(url);
 		const parts = parseRepoUrl(url);
 		if (!parts) {
 			console.error(`✗ invalid URL, skipped: ${url}`);
 			skipped++;
-			if (existing) next.push(existing);
+			if (prev) next.push(prev);
 			continue;
 		}
-		const repo = await fetchRepo(parts.owner, parts.repo);
+		const repo = await fetchRepoCached(
+			cache,
+			url,
+			parts.owner,
+			parts.repo,
+			ttlMs,
+		);
 		if (!repo) {
 			console.error(`✗ fetch failed, skipped: ${url}`);
 			skipped++;
-			if (existing) next.push(existing);
+			if (prev) next.push(prev);
 			continue;
 		}
 		const fresh = buildProjectFromUrl(repo, url);
-		if (existing) {
-			Object.assign(existing, fresh);
-			next.push(existing);
+		if (prev) {
+			Object.assign(prev, fresh);
+			next.push(prev);
 			refreshed++;
 		} else {
 			next.push(fresh);
@@ -113,24 +191,67 @@ async function main() {
 		await new Promise((r) => setTimeout(r, 200));
 	}
 
-	const removed = projects.length - next.length;
+	const removed = Math.max(0, existing.length - next.length);
+	return { projects: next, added, refreshed, skipped, removed, cache };
+}
 
-	config.current = {
-		slug: queue.current,
-		booted_at: queue.booted_at,
-		host: queue.host.name,
-		cpu: queue.host.cpu,
-		gpu: queue.host.gpu,
-		memory: queue.host.memory,
-		resolution: queue.host.resolution,
+async function main() {
+	const data = readData();
+
+	if (
+		!process.env.SYNC_FORCE &&
+		existsSync(CONFIG_PATH) &&
+		existsSync(DATA_PATH)
+	) {
+		const cfgMtime = statSync(CONFIG_PATH).mtimeMs;
+		const dataMtime = statSync(DATA_PATH).mtimeMs;
+		if (dataMtime <= cfgMtime) {
+			console.log("data.yml unchanged, skipping sync");
+			return;
+		}
+	}
+
+	const ttlMs =
+		process.env.SYNC_TTL !== undefined
+			? Number(process.env.SYNC_TTL)
+			: DEFAULT_TTL_MS;
+	const { projects, added, refreshed, skipped, removed, cache } =
+		await reconcileProjects(data.projects, ttlMs);
+
+	const config = {
+		current: {
+			slug: data.current,
+			booted_at: data.booted_at,
+			host: data.host.name,
+			cpu: data.host.cpu,
+			gpu: data.host.gpu,
+			memory: data.host.memory,
+			resolution: data.host.resolution,
+		},
+		systems: data.systems,
+		sections: {
+			about: {
+				command: data.about.command,
+				status: data.about.status,
+				bio: data.about.bio,
+				paths: data.about.paths,
+			},
+			projects: {
+				command: data.projects_ui.command,
+				root: data.projects_ui.root,
+				projects,
+			},
+			uses: data.uses,
+			contact: data.contact,
+		},
 	};
-	config.sections.about.status = { ...queue.about.status };
-	config.sections.projects.projects = next;
 
-	writeFileSync(CONFIG_PATH, JSON.stringify(config, null, "\t") + "\n");
+	mkdirSync(dirname(CONFIG_PATH), { recursive: true });
+	writeFileSync(CONFIG_PATH, `${JSON.stringify(config, null, "\t")}\n`);
+	writeCache(cache);
 
 	console.log(
-		`\n✓ ${added} added, ${refreshed} refreshed, ${removed} removed, ${skipped} skipped`,
+		`\n✓ ${added} added, ${refreshed} refreshed, ${removed} removed, ${skipped} skipped (cache TTL ${ttlMs}ms)`,
 	);
 }
 
