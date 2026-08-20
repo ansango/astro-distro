@@ -1,6 +1,6 @@
 # astro-distro
 
-![astro-distro](./public/og.png)
+![astro-distro](./docs/screenshots/themes/theme-debian.png)
 
 Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML files drive the site, project metadata is synced from GitHub, and the generated `config.json` is gitignored — clean repo, single source of truth, reproducible builds.
 
