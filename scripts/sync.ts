@@ -1,14 +1,13 @@
 #!/usr/bin/env bun
 /**
- * Build src/config.json from src/data.yml + GitHub project metadata.
+ * Build src/config.json from src/data.yml + src/systems.yml + GitHub project metadata.
  *
- * - data.yml is the source of truth (manual config + projects URLs).
+ * - data.yml and systems.yml are the sources of truth (manual config).
  * - Each project URL is fetched from GitHub; existing entries are refreshed,
  *   missing ones are appended, entries no longer in the queue are dropped.
  * - GitHub responses are cached in `.cache/sync.json` with a TTL (default 1h).
- * - If data.yml is older than config.json and the cache is fresh, sync is skipped.
+ * - If neither input YAML has changed since the last sync, sync is skipped.
  * - Set GH_TOKEN (or GITHUB_TOKEN) to raise the API rate limit from 60/h to 5000/h.
- * - data.yml is left untouched.
  *
  * Use:
  *   bun run scripts/sync.ts
@@ -37,6 +36,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const CONFIG_PATH = resolve(ROOT, "src/config.json");
 const DATA_PATH = resolve(ROOT, "src/data.yml");
+const SYSTEMS_PATH = resolve(ROOT, "src/systems.yml");
 const CACHE_PATH = resolve(ROOT, ".cache/sync.json");
 
 const DEFAULT_TTL_MS = 60 * 60 * 1000; // 1 hour
@@ -57,7 +57,6 @@ interface Data {
 		bio: { icon: string; text: string }[];
 		paths: { name: string; current?: boolean }[];
 	};
-	systems: Record<string, unknown>[];
 	uses: {
 		command: string;
 		cpu: Record<string, unknown>;
@@ -97,6 +96,16 @@ function readData(): Data {
 	return parsed;
 }
 
+function readSystems(): Record<string, unknown>[] {
+	const raw = readFileSync(SYSTEMS_PATH, "utf-8");
+	const parsed = parseYaml(raw) as Record<string, unknown>[];
+	if (!Array.isArray(parsed)) {
+		console.error("✗ systems.yml must be an array");
+		process.exit(1);
+	}
+	return parsed;
+}
+
 function readCache(): Cache {
 	try {
 		return JSON.parse(readFileSync(CACHE_PATH, "utf-8")) as Cache;
@@ -108,6 +117,10 @@ function readCache(): Cache {
 function writeCache(cache: Cache): void {
 	mkdirSync(dirname(CACHE_PATH), { recursive: true });
 	writeFileSync(CACHE_PATH, `${JSON.stringify(cache, null, "\t")}\n`);
+}
+
+function mtimeMs(path: string): number {
+	return existsSync(path) ? statSync(path).mtimeMs : 0;
 }
 
 async function fetchRepoCached(
@@ -196,20 +209,18 @@ async function reconcileProjects(
 }
 
 async function main() {
-	const data = readData();
-
 	if (
 		!process.env.SYNC_FORCE &&
 		existsSync(CONFIG_PATH) &&
-		existsSync(DATA_PATH)
+		mtimeMs(DATA_PATH) <= mtimeMs(CONFIG_PATH) &&
+		mtimeMs(SYSTEMS_PATH) <= mtimeMs(CONFIG_PATH)
 	) {
-		const cfgMtime = statSync(CONFIG_PATH).mtimeMs;
-		const dataMtime = statSync(DATA_PATH).mtimeMs;
-		if (dataMtime <= cfgMtime) {
-			console.log("data.yml unchanged, skipping sync");
-			return;
-		}
+		console.log("input YAMLs unchanged, skipping sync");
+		return;
 	}
+
+	const data = readData();
+	const systems = readSystems();
 
 	const ttlMs =
 		process.env.SYNC_TTL !== undefined
@@ -228,7 +239,7 @@ async function main() {
 			memory: data.host.memory,
 			resolution: data.host.resolution,
 		},
-		systems: data.systems,
+		systems,
 		sections: {
 			about: {
 				command: data.about.command,
