@@ -47,7 +47,13 @@ interface Data {
 		description: string;
 		url: string;
 		author: string;
+		handle_suffix?: string;
 		image: string;
+		image_width: number;
+		image_height: number;
+		theme_color: string;
+		job_title: string;
+		social: Record<string, string>;
 		twitter: string;
 		locale: string;
 		type: string;

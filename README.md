@@ -1,12 +1,14 @@
 # astro-distro
 
-Personal portfolio styled as a `fastfetch` / `neofetch`-style terminal session. Static site built with [Astro](https://astro.build) + [Tailwind CSS](https://tailwindcss.com), managed from a pair of YAML files.
+Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML files drive the site, project metadata is synced from GitHub, and the generated `config.json` is gitignored — clean repo, single source of truth, reproducible builds.
+
+> Built initially as a personal portfolio, designed to be reused as a template: every piece of content lives in `src/data.yml` or `src/systems.yml`.
 
 ## Stack
 
 - [Astro](https://astro.build) — static site generator
 - [Tailwind CSS 4](https://tailwindcss.com) — via `@tailwindcss/vite`
-- [Bun](https://bun.sh) — runtime, package manager, YAML parser (script uses `js-yaml` for pretty output)
+- [Bun](https://bun.sh) — runtime, package manager, YAML parser
 - [Biome](https://biomejs.dev) — lint + format
 - [GitHub Actions](https://github.com/features/actions) — CI
 
@@ -17,28 +19,33 @@ Personal portfolio styled as a `fastfetch` / `neofetch`-style terminal session. 
 ├── .github/workflows/sync.yml        # CI: build on push to data files
 ├── .env.example                      # optional GH_TOKEN
 ├── astro.config.mjs                  # Tailwind plugin + @/* alias
-├── data.yml                          # site config (manual)
+├── tsconfig.json                     # extends astro/tsconfigs/strict + @/* alias
 ├── package.json
-├── public/                           # static assets
+├── public/
+│   ├── robots.txt                    # crawler config
+│   ├── apple-touch-icon.png          # iOS home screen (180×180)
+│   ├── favicon.svg
+│   └── favicon.ico
 ├── scripts/
 │   ├── lib/project.ts                # shared GitHub fetch helpers
 │   └── sync.ts                       # YAML + GitHub → config.json
-├── src/
-│   ├── components/
-│   │   ├── seo.astro                 # <title>, OG, Twitter Card, canonical
-│   │   ├── distro-toggle.astro       # theme picker
-│   │   ├── section-title.astro
-│   │   ├── logos/                    # fastfetch-style ASCII logos
-│   │   └── tui/                      # TUI-style sections
-│   │       ├── btop/                 # CPU / memory / hardware / peripherals
-│   │       ├── lazygit/              # bio + status + paths
-│   │       ├── mutt/                 # contact + inbox
-│   │       └── ranger/               # projects tree + detail
-│   ├── layouts/default.astro         # base layout (uses Seo)
-│   ├── lib/                          # cn util, themes, fonts, fastfetch cache
-│   ├── pages/index.astro
-│   └── styles/global.css
-└── tsconfig.json                     # extends astro/tsconfigs/strict + @/* alias
+└── src/
+    ├── components/
+    │   ├── seo.astro                 # <title>, OG, Twitter Card, JSON-LD…
+    │   ├── distro-toggle.astro       # theme picker
+    │   ├── section-title.astro
+    │   ├── logos/                    # fastfetch-style ASCII logos
+    │   └── tui/                      # TUI-style sections
+    │       ├── btop/                 # CPU / memory / hardware / peripherals
+    │       ├── lazygit/              # bio + status + paths
+    │       ├── mutt/                 # contact + inbox
+    │       └── ranger/               # projects tree + detail
+    ├── data.yml                      # site + content config
+    ├── systems.yml                   # the 26 distro entries
+    ├── layouts/default.astro         # base layout (uses Seo)
+    ├── lib/                          # cn util, themes, fonts, fastfetch cache
+    ├── pages/index.astro
+    └── styles/global.css
 ```
 
 ## Source of truth
@@ -50,7 +57,7 @@ Two YAML files are the **only** manual config. Everything else is generated.
 Top-level site config + manual content that doesn't come from GitHub:
 
 ```yaml
-site:            # SEO defaults (title, description, url, image, twitter…)
+site:            # SEO defaults (title, description, url, image, theme_color…)
 current:         # active system slug
 booted_at:       # ISO timestamp for the live-computed uptime
 host:            # hardware info (manual, doesn't change often)
@@ -115,6 +122,18 @@ It installs deps and runs `bun run build`, which auto-runs `sync` via the `prebu
 
 The workflow passes `secrets.GITHUB_TOKEN` as `GH_TOKEN` so the sync script uses authenticated requests.
 
+## SEO
+
+`src/components/seo.astro` renders a complete meta block from `data.yml.site`:
+
+- **Primary** — `<title>`, `description`, `theme-color`, `canonical`, `apple-touch-icon`
+- **Open Graph** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` + `og:image:width`/`height`, `og:locale`, `og:site_name`
+- **Twitter Card** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image`, `twitter:creator` (only if set)
+- **Structured data** — JSON-LD `WebSite` schema with a nested `Person` author block (auto-generated from `site.social.github`/`twitter`/`linkedin`)
+- **robots.txt** — `public/robots.txt` allows everything by default
+
+The page sets `<title>` via the `title` prop on `<Layout>`. If the title already contains `site.title` (case-insensitive), no suffix is added; otherwise ` · {site.title}` is appended.
+
 ## Caches
 
 Two caches, both in `.cache/` (gitignored):
@@ -135,3 +154,14 @@ import Prompt from "@/components/tui/commons/prompt.astro";
 ```
 
 `cn` is a small util in `src/lib/cn.ts` that wraps `tailwind-merge` to merge Tailwind classes safely.
+
+## Using as a template
+
+1. Fork or clone the repo
+2. Edit `src/data.yml` — replace `site` block (title, description, url, author, social)
+3. Edit `src/systems.yml` — keep, remove, or add distros
+4. Replace `src/data.yml#projects` with your own GitHub repo URLs
+5. Edit `src/data.yml#about.bio`, `paths`, `contact.inbox` for your content
+6. Add your own `public/og.png` (1200×630) and replace `public/apple-touch-icon.png`
+7. (Optional) set `GH_TOKEN` in `.env` for higher API rate limits
+8. `bun install && bun run dev`

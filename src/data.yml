@@ -1,12 +1,19 @@
 site:
-  title: ansango
-  description: Senior software engineer — JS/TS, frontend, performance. Portfolio fastfetch-style.
-  url: https://ansango.com
+  title: astro-distro
+  description: Astro + Tailwind fastfetch-style portfolio template. TUI components, themeable systems, projects synced from GitHub via YAML.
+  url: https://astro-distro.pages.dev
   author: ansango
+  handle_suffix: dev
   image: /og.png
+  image_width: 1200
+  image_height: 630
+  theme_color: '#1793d1'
+  job_title: astro-distro template
+  social:
+    github: ansango/astro-distro
   twitter: ''
   locale: en
-  type: profile
+  type: website
 
 current: debian
 booted_at: '2026-08-20T10:00:00Z'
