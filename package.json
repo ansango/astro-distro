@@ -11,7 +11,8 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"check": "biome check --write",
-		"sync:projects": "bun run scripts/sync-projects.ts"
+		"sync:projects": "bun run scripts/sync-projects.ts",
+		"sync:queue": "bun run scripts/add-projects.ts"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.3.3",

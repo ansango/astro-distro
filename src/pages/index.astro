@@ -44,9 +44,11 @@ const info: {
     <DistroLogo />
     <div>
       <div class="font-medium text-accent mb-1.5">
-        <h1 class="inline border-b border-dim pb-0.5">ansango<span class="text-dim">@</span>dev</h1>
+        <h1 class="inline border-b border-dim pb-0.5">
+          ansango<span class="text-dim">@</span>dev
+        </h1>
       </div>
-      
+
       {info.map(({ k, v, dim, perDistro }) => (
                     <div class="mb-[0.05rem] flex items-center gap-2">
                         <span class="inline-block font-medium text-accent min-w-[90px]">
@@ -66,12 +68,10 @@ const info: {
     </div>
   </div>
 
-
   <section class="my-10">
     <SectionTitle title="about" />
     <Lazygit />
   </section>
-
 
   <section class="my-10">
     <SectionTitle title="projects" />
@@ -82,7 +82,7 @@ const info: {
     <SectionTitle title="uses" />
     <Btop />
   </section>
-  
+
   <section class="my-10">
     <SectionTitle title="contact" />
     <Mutt />

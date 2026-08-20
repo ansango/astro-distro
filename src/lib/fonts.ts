@@ -45,8 +45,8 @@ type SystemFont = (typeof systems)[number]["font"];
 export const FONT_FAMILY: Record<SystemFont, string> = {
 	"JetBrains Mono": "JetBrains Mono",
 	"Ubuntu Mono": "Ubuntu Mono",
-	"Hack": "Fira Code",
-	"Inter": "Inter",
+	Hack: "Fira Code",
+	Inter: "Inter",
 	"Noto Sans": "Noto Sans",
 	"Noto Sans Mono": "Noto Sans Mono",
 	"Roboto Mono": "Roboto Mono",
@@ -56,8 +56,8 @@ export const FONT_FAMILY: Record<SystemFont, string> = {
 	"Liberation Mono": "JetBrains Mono",
 	"Cascadia Mono": "JetBrains Mono",
 	"SF Mono": "JetBrains Mono",
-	"Monospace": "JetBrains Mono",
-	"Cantarell": "Inter",
+	Monospace: "JetBrains Mono",
+	Cantarell: "Inter",
 };
 
 /**

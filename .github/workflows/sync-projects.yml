@@ -1,0 +1,41 @@
+name: sync-projects
+
+on:
+  schedule:
+    - cron: "0 0 */14 * *"
+  workflow_dispatch:
+  push:
+    paths:
+      - src/projects-queue.json
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Add queued projects
+        run: bun run sync:queue
+
+      - name: Sync existing projects
+        run: bun run sync:projects
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/config.json src/projects-queue.json
+          git commit -m "chore: sync projects from GitHub [skip ci]"
+          git push

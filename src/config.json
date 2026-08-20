@@ -741,7 +741,7 @@
 					"description": "A modern, content-first personal website built with Astro, designed for technology arti…",
 					"repo": "github.com/ansango/ansango.template",
 					"stars": "★ 1",
-					"updated": "updated 8 months ago",
+					"updated": "updated 9 months ago",
 					"url": "https://github.com/ansango/ansango.template",
 					"size": "1.7M",
 					"date": "Nov 19"
@@ -771,7 +771,7 @@
 					"description": "A node ts lastfm client api",
 					"repo": "github.com/ansango/lastfm-api",
 					"stars": "★ 1",
-					"updated": "updated yesterday",
+					"updated": "updated 2 weeks ago",
 					"url": "https://github.com/ansango/lastfm-api",
 					"size": "386K",
 					"date": "Aug 03"
@@ -781,7 +781,7 @@
 					"description": "a simple metadata links obsidian plugin",
 					"repo": "github.com/ansango/obsidian-metadata-links",
 					"stars": "★ 1",
-					"updated": "updated 3 weeks ago",
+					"updated": "updated 1 month ago",
 					"url": "https://github.com/ansango/obsidian-metadata-links",
 					"size": "167K",
 					"date": "Jul 10"
@@ -791,7 +791,7 @@
 					"description": "a simple renaming filename obsidian plugin",
 					"repo": "github.com/ansango/obsidian-slugify",
 					"stars": "★ 1",
-					"updated": "updated 3 weeks ago",
+					"updated": "updated 1 month ago",
 					"url": "https://github.com/ansango/obsidian-slugify",
 					"size": "81K",
 					"date": "Jul 09"
@@ -801,10 +801,20 @@
 					"description": "CLI for the Last.fm API, built on lastfm-client-ts. Read-only by default.",
 					"repo": "github.com/ansango/lastfm-cli",
 					"stars": "★ 1",
-					"updated": "updated yesterday",
+					"updated": "updated 2 weeks ago",
 					"url": "https://github.com/ansango/lastfm-cli",
 					"size": "44K",
 					"date": "Aug 03"
+				},
+				{
+					"name": "readme",
+					"description": "Wiki de Linux Basics for Hackers (19 capítulos + índice)",
+					"repo": "github.com/ansango/readme",
+					"stars": "★ 1",
+					"updated": "updated today",
+					"url": "https://github.com/ansango/readme",
+					"size": "6.4M",
+					"date": "Aug 20"
 				}
 			]
 		},

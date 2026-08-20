@@ -18,9 +18,7 @@ const { usage } = Astro.props;
 <Container>
   <Label>CPU [daily usage]</Label>
   <Content>
-    <div
-      class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1 "
-    >
+    <div class="font-mono grid grid-cols-12 items-center gap-x-3 gap-y-1 ">
       {usage.map(({ label, percent, detail, note }) => (
         <Fragment>
           <span class="col-span-3 sm:col-span-2">{label.padEnd(10)}</span>
