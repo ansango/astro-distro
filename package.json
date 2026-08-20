@@ -11,12 +11,12 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"check": "biome check --write",
-		"sync:projects": "bun run scripts/sync-projects.ts",
-		"sync:queue": "bun run scripts/reconcile-projects.ts"
+		"sync": "bun run scripts/sync.ts"
 	},
 	"dependencies": {
 		"@tailwindcss/vite": "^4.3.3",
 		"astro": "^7.1.6",
+		"tailwind-merge": "^3.6.0",
 		"tailwindcss": "^4.3.3"
 	},
 	"devDependencies": {

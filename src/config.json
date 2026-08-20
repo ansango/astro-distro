@@ -1,18 +1,12 @@
 {
 	"current": {
+		"slug": "debian",
+		"booted_at": "2026-08-20T10:00:00Z",
 		"host": "Gigabyte B660 DS3H DDR4",
-		"uptime": "1 day, 2 hours, 30 minutes",
-		"resolution": "3840x2400",
-		"kernel": "6.12.0-13-amd64",
-		"shell": "gnome shell",
-		"de": "gnome",
-		"wm": "mutter",
-		"theme": "tokyo night",
-		"terminal": "gnome-terminal",
 		"cpu": "Intel i5 12th Gen",
 		"gpu": "NVIDIA GTX 1060 6GB",
 		"memory": "16384MiB / 65536MiB",
-		"font": "Monospace"
+		"resolution": "3840x2400"
 	},
 	"systems": [
 		{
@@ -671,7 +665,7 @@
 			"command": "lazygit --view bio",
 			"status": {
 				"branch": "main",
-				"since": "2019",
+				"since": 2019,
 				"ahead": 2,
 				"behind": 0,
 				"modified": 6,

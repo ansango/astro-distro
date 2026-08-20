@@ -1,5 +1,5 @@
-import { fetchLogo } from "../../lib/fastfetch";
-import { systems } from "../../lib/themes";
+import { fetchLogo } from "@/lib/fastfetch";
+import { systems } from "@/lib/themes";
 
 const resolvedSystems = async () =>
 	await Promise.all(

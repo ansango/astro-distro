@@ -6,7 +6,7 @@
  * La fuente de verdad es `src/config.json`; este módulo solo añade los tipos
  * que TypeScript necesita para mantener el tipado en el resto de la app.
  */
-import config from "../config.json";
+import config from "@/config.json";
 
 export const systems = config.systems;
 export type System = (typeof systems)[number];
