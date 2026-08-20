@@ -17,6 +17,8 @@ Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML
   <img src="./docs/screenshots/themes/theme-kali.png" width="49%" alt="kali theme" />
 </div>
 
+All 26: `arch`, `archcraft`, `debian`, `ubuntu`, `linuxmint`, `kali`, `fedora`, `opensuse`, `alpine`, `gentoo`, `manjaro`, `centos`, `void`, `nixos`, `slackware`, `pop`, `elementary`, `cachyos`, `windows`, `macos`, `android`, `raspbian`, `proxmox`, `truenas_scale`, `parrot`, `gnu`. Each one defined in [`src/systems.yml`](./src/systems.yml) with its own color palette, kernel, shell, DE, WM, theme, terminal, font, and ASCII logo (fetched from [fastfetch-cli](https://github.com/fastfetch-cli/fastfetch)).
+
 ## Stack
 
 - [Astro](https://astro.build) — static site generator
