@@ -34,8 +34,8 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "ansango"
+          git config user.email "ansango@users.noreply.github.com"
           git add src/config.json src/projects-queue.json
           git commit -m "chore: sync projects from GitHub [skip ci]"
           git push
