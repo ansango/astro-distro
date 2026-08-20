@@ -1,3 +1,13 @@
+site:
+  title: ansango
+  description: Senior software engineer — JS/TS, frontend, performance. Portfolio fastfetch-style.
+  url: https://ansango.com
+  author: ansango
+  image: /og.png
+  twitter: ''
+  locale: en
+  type: profile
+
 current: debian
 booted_at: '2026-08-20T10:00:00Z'
 host:

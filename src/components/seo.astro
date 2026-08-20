@@ -1,0 +1,54 @@
+---
+import config from "@/config.json";
+
+export interface Props {
+  /** page-specific title */
+  title: string;
+  /** overrides site.description */
+  description?: string;
+  /** overrides site.image (absolute URL or path relative to site.url) */
+  image?: string;
+  /** og:type — defaults to "website" */
+  type?: "website" | "profile" | "article";
+}
+
+const site = config.site;
+const { title, description, image, type = "website" } = Astro.props;
+
+const desc = description ?? site.description;
+const fullTitle = title.toLowerCase().includes(site.title.toLowerCase())
+  ? title
+  : `${title} · ${site.title}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = image
+  ? new URL(image, site.url).href
+  : new URL(site.image, site.url).href;
+---
+
+<!-- Primary -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle}>
+<meta name="description" content={desc}>
+<link rel="canonical" href={canonical}>
+
+<!-- Open Graph -->
+<meta property="og:type" content={type}>
+<meta property="og:url" content={canonical}>
+<meta property="og:title" content={fullTitle}>
+<meta property="og:description" content={desc}>
+<meta property="og:image" content={ogImage}>
+<meta property="og:locale" content={site.locale}>
+<meta property="og:site_name" content={site.title}>
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content={canonical}>
+<meta name="twitter:title" content={fullTitle}>
+<meta name="twitter:description" content={desc}>
+<meta name="twitter:image" content={ogImage}>
+{site.twitter && (
+  <meta name="twitter:creator" content={site.twitter} />
+)}
+
+<!-- Misc -->
+<meta name="author" content={site.author}>

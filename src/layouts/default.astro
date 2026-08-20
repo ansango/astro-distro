@@ -1,5 +1,6 @@
 ---
 import DistroToggle from "@/components/distro-toggle.astro";
+import Seo from "@/components/seo.astro";
 import config from "@/config.json";
 import { FONT_FAMILY, fontStack } from "@/lib/fonts";
 import { DEFAULT_THEME, STORAGE_KEY, themes } from "@/lib/themes";
@@ -13,12 +14,7 @@ interface Props {
   lang?: string;
 }
 
-const {
-  title,
-  description = "",
-  theme = DEFAULT_THEME,
-  lang = "en",
-} = Astro.props;
+const { title, description, theme = DEFAULT_THEME, lang = "en" } = Astro.props;
 
 const distroVisibilityCss = [
   "[data-distro]{display:none}",
@@ -47,10 +43,9 @@ const themeFontsCss = config.systems
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content={description}>
     <meta name="generator" content={Astro.generator}>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <title>{title}</title>
+    <Seo title={title} description={description} />
     <!-- aplica el tema guardado antes del primer paint para evitar el flash -->
     <script is:inline define:vars={{ themes, storageKey: STORAGE_KEY }}>
       const stored = localStorage.getItem(storageKey);

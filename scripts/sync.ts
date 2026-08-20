@@ -42,6 +42,16 @@ const CACHE_PATH = resolve(ROOT, ".cache/sync.json");
 const DEFAULT_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 interface Data {
+	site: {
+		title: string;
+		description: string;
+		url: string;
+		author: string;
+		image: string;
+		twitter: string;
+		locale: string;
+		type: string;
+	};
 	current: string;
 	booted_at: string;
 	host: {
@@ -230,6 +240,7 @@ async function main() {
 		await reconcileProjects(data.projects, ttlMs);
 
 	const config = {
+		site: data.site,
 		current: {
 			slug: data.current,
 			booted_at: data.booted_at,
