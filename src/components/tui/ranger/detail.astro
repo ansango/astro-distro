@@ -11,6 +11,7 @@ export interface Props {
     stars: string;
     updated: string;
     url: string;
+    homepage?: string;
   }[];
 }
 
@@ -30,8 +31,17 @@ const { projects } = Astro.props;
           href={project.url}
           target="_blank"
           rel="noopener"
-          >→ open in browser</a
+          >→ repo</a
         >
+        {project.homepage && (
+          <a
+            class="ml-3 text-accent hover:underline"
+            href={project.homepage}
+            target="_blank"
+            rel="noopener"
+            >→ visit site</a
+          >
+        )}
       </Content>
     </Container>
   </div>

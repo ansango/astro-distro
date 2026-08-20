@@ -735,7 +735,91 @@
 		"projects": {
 			"command": "ranger /home/ansango/projects",
 			"root": "/home/ansango",
-			"projects": []
+			"projects": [
+				{
+					"name": "ansango.template",
+					"description": "A modern, content-first personal website built with Astro, designed for technology arti…",
+					"repo": "github.com/ansango/ansango.template",
+					"stars": "★ 1",
+					"updated": "updated 9 months ago",
+					"size": "1.7M",
+					"date": "Nov 19",
+					"url": "https://github.com/ansango/ansango.template",
+					"homepage": "https://ansango.com"
+				},
+				{
+					"name": "anibalsantosgomez.film",
+					"description": "A portfolio website showcasing analog photography. Built with Next.js and TinaCMS",
+					"repo": "github.com/ansango/anibalsantosgomez.film",
+					"stars": "★ 1",
+					"updated": "updated 1 year ago",
+					"size": "276.7M",
+					"date": "Sep 18",
+					"url": "https://github.com/ansango/anibalsantosgomez.film",
+					"homepage": "https://films.anibalsantosgomez.com"
+				},
+				{
+					"name": "uziq",
+					"description": "Uziq is a web application built with Svelte 5, Svelkit, TypeScript, TailwindCSS, and Ta…",
+					"repo": "github.com/ansango/uziq",
+					"stars": "★ 2",
+					"updated": "updated 1 year ago",
+					"size": "219K",
+					"date": "May 22",
+					"url": "https://github.com/ansango/uziq",
+					"homepage": "https://uziq.vercel.app"
+				},
+				{
+					"name": "lastfm-api",
+					"description": "A node ts lastfm client api",
+					"repo": "github.com/ansango/lastfm-api",
+					"stars": "★ 1",
+					"updated": "updated 2 weeks ago",
+					"size": "386K",
+					"date": "Aug 03",
+					"url": "https://github.com/ansango/lastfm-api"
+				},
+				{
+					"name": "obsidian-metadata-links",
+					"description": "a simple metadata links obsidian plugin",
+					"repo": "github.com/ansango/obsidian-metadata-links",
+					"stars": "★ 1",
+					"updated": "updated 1 month ago",
+					"size": "167K",
+					"date": "Jul 10",
+					"url": "https://github.com/ansango/obsidian-metadata-links"
+				},
+				{
+					"name": "obsidian-slugify",
+					"description": "a simple renaming filename obsidian plugin",
+					"repo": "github.com/ansango/obsidian-slugify",
+					"stars": "★ 1",
+					"updated": "updated 1 month ago",
+					"size": "81K",
+					"date": "Jul 09",
+					"url": "https://github.com/ansango/obsidian-slugify"
+				},
+				{
+					"name": "lastfm-cli",
+					"description": "CLI for the Last.fm API, built on lastfm-client-ts. Read-only by default.",
+					"repo": "github.com/ansango/lastfm-cli",
+					"stars": "★ 1",
+					"updated": "updated 2 weeks ago",
+					"size": "44K",
+					"date": "Aug 03",
+					"url": "https://github.com/ansango/lastfm-cli"
+				},
+				{
+					"name": "readme",
+					"description": "Wiki de Linux Basics for Hackers (19 capítulos + índice)",
+					"repo": "github.com/ansango/readme",
+					"stars": "★ 1",
+					"updated": "updated today",
+					"size": "6.4M",
+					"date": "Aug 20",
+					"url": "https://github.com/ansango/readme"
+				}
+			]
 		},
 		"uses": {
 			"command": "btop --view stack — daily usage && hardware",

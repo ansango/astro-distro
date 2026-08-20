@@ -12,6 +12,7 @@ export interface Project {
 	url: string;
 	size: string;
 	date: string;
+	homepage?: string;
 }
 
 export interface GHRepo {
@@ -19,6 +20,7 @@ export interface GHRepo {
 	name: string;
 	description: string | null;
 	html_url: string;
+	homepage: string | null;
 	stargazers_count: number;
 	size: number;
 	updated_at: string;
@@ -117,7 +119,7 @@ export async function fetchRepo(
 
 export function buildProjectFromUrl(repo: GHRepo, url: string): Project {
 	const description = (repo.description ?? "").trim();
-	return {
+	const project: Project = {
 		name: repo.name,
 		description:
 			description.length > 90
@@ -130,4 +132,6 @@ export function buildProjectFromUrl(repo: GHRepo, url: string): Project {
 		date: formatDate(repo.updated_at),
 		url,
 	};
+	if (repo.homepage) project.homepage = repo.homepage;
+	return project;
 }
