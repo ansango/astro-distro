@@ -1,6 +1,9 @@
 /**
  * One-off screenshot capture for the astro-distro template.
  *
+ * Captures 4 theme screenshots + 1 featured, all 16:9 / 1280px wide.
+ * Scrolled to #about so lazygit (bio + status + paths) is the main subject.
+ *
  * Usage:
  *   bun run build
  *   bun run preview &              # serves dist/ at http://127.0.0.1:4321
@@ -15,16 +18,15 @@ import { chromium } from "playwright";
 
 const BASE = process.env.SCREENSHOT_BASE ?? "http://127.0.0.1:4321";
 const THEMES = ["debian", "arch", "ubuntu", "kali"];
+const VIEWPORT = { width: 1280, height: 720 };
 
 const OUT = "docs/screenshots";
 mkdirSync(`${OUT}/themes`, { recursive: true });
 
 const browser = await chromium.launch();
 
-// ── Theme screenshots (1280×1600 — captures fastfetch header + lazygit + start of projects) ──
-const themeCtx = await browser.newContext({
-	viewport: { width: 1280, height: 1600 },
-});
+// ── Theme screenshots (1280×720, scrolled to lazygit) ────────────────
+const themeCtx = await browser.newContext({ viewport: VIEWPORT });
 for (const theme of THEMES) {
 	await themeCtx.addInitScript((t) => {
 		localStorage.setItem("theme", t);
@@ -32,6 +34,8 @@ for (const theme of THEMES) {
 	const page = await themeCtx.newPage();
 	await page.goto(BASE, { waitUntil: "networkidle" });
 	await page.waitForTimeout(400);
+	await page.locator("#about").scrollIntoViewIfNeeded();
+	await page.waitForTimeout(200);
 	const path = `${OUT}/themes/theme-${theme}.png`;
 	await page.screenshot({ path });
 	await page.close();
@@ -39,10 +43,8 @@ for (const theme of THEMES) {
 }
 await themeCtx.close();
 
-// ── Featured (1200×1100, debian theme, scrolled to lazygit) ─────────
-const featCtx = await browser.newContext({
-	viewport: { width: 1200, height: 1100 },
-});
+// ── Featured (1280×720, debian theme, scrolled to lazygit) ──────────
+const featCtx = await browser.newContext({ viewport: VIEWPORT });
 await featCtx.addInitScript(() => {
 	localStorage.setItem("theme", "debian");
 });
