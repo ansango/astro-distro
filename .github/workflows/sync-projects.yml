@@ -22,7 +22,7 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Add queued projects
+      - name: Reconcile projects from queue
         run: bun run sync:queue
 
       - name: Sync existing projects
