@@ -14,6 +14,12 @@ site:
   twitter: ''
   locale: en
   type: website
+  default_theme: debian
+  footer:
+    status: session closed
+    errors: 0
+    warnings: 0
+    uptime: 5y
 
 current: debian
 booted_at: '2026-08-20T10:00:00Z'

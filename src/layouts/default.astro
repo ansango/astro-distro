@@ -69,13 +69,13 @@ const themeFontsCss = config.systems
       <div class="flex flex-wrap justify-between gap-2 text-[0.85rem]">
         <div class="flex flex-wrap items-center gap-2 text-[0.85rem]">
           <span class="text-accent">●</span>
-          <span>session closed</span>
+          <span>{config.site.footer?.status ?? "session closed"}</span>
           <span class="text-border">·</span>
-          <span>0 errors</span>
+          <span>{config.site.footer?.errors ?? 0} errors</span>
           <span class="text-border">·</span>
-          <span>0 warnings</span>
+          <span>{config.site.footer?.warnings ?? 0} warnings</span>
           <span class="text-border">·</span>
-          <span>uptime 5y</span>
+          <span>uptime {config.site.footer?.uptime ?? "0y"}</span>
           <span class="text-border">·</span>
         </div>
         <span class="text-border">·</span>

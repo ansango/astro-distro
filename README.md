@@ -1,5 +1,7 @@
 # astro-distro
 
+![astro-distro](./public/og.png)
+
 Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML files drive the site, project metadata is synced from GitHub, and the generated `config.json` is gitignored — clean repo, single source of truth, reproducible builds.
 
 > Built initially as a personal portfolio, designed to be reused as a template: every piece of content lives in `src/data.yml` or `src/systems.yml`.

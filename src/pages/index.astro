@@ -95,7 +95,7 @@ const info: {
   </section>
 </Layout>
 
-<script define:vars={{ bootedAt: current.booted_at }}>
+<script is:inline define:vars={{ bootedAt: current.booted_at }}>
   const start = new Date(bootedAt).getTime();
 
   function formatUptime(ms) {

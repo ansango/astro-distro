@@ -13,6 +13,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"check": "biome check --write",
+		"test": "bun test",
 		"sync": "bun run scripts/sync.ts"
 	},
 	"dependencies": {

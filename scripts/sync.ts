@@ -57,6 +57,12 @@ interface Data {
 		twitter: string;
 		locale: string;
 		type: string;
+		footer?: {
+			status: string;
+			errors: number;
+			warnings: number;
+			uptime: string;
+		};
 	};
 	current: string;
 	booted_at: string;
