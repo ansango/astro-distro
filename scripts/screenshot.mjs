@@ -25,7 +25,7 @@ mkdirSync(`${OUT}/themes`, { recursive: true });
 
 const browser = await chromium.launch();
 
-// ── Theme screenshots (1280×720, scrolled to lazygit) ────────────────
+// ── Theme screenshots (1280×720, top of page) ───────────────────────
 const themeCtx = await browser.newContext({ viewport: VIEWPORT });
 for (const theme of THEMES) {
 	await themeCtx.addInitScript((t) => {
@@ -34,8 +34,6 @@ for (const theme of THEMES) {
 	const page = await themeCtx.newPage();
 	await page.goto(BASE, { waitUntil: "networkidle" });
 	await page.waitForTimeout(400);
-	await page.locator("#about").scrollIntoViewIfNeeded();
-	await page.waitForTimeout(200);
 	const path = `${OUT}/themes/theme-${theme}.png`;
 	await page.screenshot({ path });
 	await page.close();
@@ -43,7 +41,7 @@ for (const theme of THEMES) {
 }
 await themeCtx.close();
 
-// ── Featured (1280×720, debian theme, scrolled to lazygit) ──────────
+// ── Featured (1280×720, debian theme, top of page) ──────────────────
 const featCtx = await browser.newContext({ viewport: VIEWPORT });
 await featCtx.addInitScript(() => {
 	localStorage.setItem("theme", "debian");
@@ -51,8 +49,6 @@ await featCtx.addInitScript(() => {
 const featPage = await featCtx.newPage();
 await featPage.goto(BASE, { waitUntil: "networkidle" });
 await featPage.waitForTimeout(400);
-await featPage.locator("#about").scrollIntoViewIfNeeded();
-await featPage.waitForTimeout(200);
 const featured = `${OUT}/featured.png`;
 await featPage.screenshot({ path: featured });
 console.log(`✓ ${featured}`);
