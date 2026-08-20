@@ -39,9 +39,9 @@ for (const theme of THEMES) {
 }
 await themeCtx.close();
 
-// ── Featured (1200×630, debian theme, top of page) ──────────────────
+// ── Featured (1200×1100, debian theme, scrolled to lazygit) ─────────
 const featCtx = await browser.newContext({
-	viewport: { width: 1200, height: 630 },
+	viewport: { width: 1200, height: 1100 },
 });
 await featCtx.addInitScript(() => {
 	localStorage.setItem("theme", "debian");
@@ -49,6 +49,8 @@ await featCtx.addInitScript(() => {
 const featPage = await featCtx.newPage();
 await featPage.goto(BASE, { waitUntil: "networkidle" });
 await featPage.waitForTimeout(400);
+await featPage.locator("#about").scrollIntoViewIfNeeded();
+await featPage.waitForTimeout(200);
 const featured = `${OUT}/featured.png`;
 await featPage.screenshot({ path: featured });
 console.log(`✓ ${featured}`);
