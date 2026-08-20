@@ -6,6 +6,17 @@ Astro template for a `fastfetch` / `neofetch`-style terminal portfolio. Two YAML
 
 > Built initially as a personal portfolio, designed to be reused as a template: every piece of content lives in `src/data.yml` or `src/systems.yml`.
 
+## Themes
+
+26 distro color schemes, switchable from the header. Four shown below:
+
+<div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+  <img src="./docs/screenshots/themes/theme-debian.png" width="49%" alt="debian theme" />
+  <img src="./docs/screenshots/themes/theme-arch.png" width="49%" alt="arch theme" />
+  <img src="./docs/screenshots/themes/theme-ubuntu.png" width="49%" alt="ubuntu theme" />
+  <img src="./docs/screenshots/themes/theme-kali.png" width="49%" alt="kali theme" />
+</div>
+
 ## Stack
 
 - [Astro](https://astro.build) — static site generator
