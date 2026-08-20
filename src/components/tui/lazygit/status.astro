@@ -29,11 +29,11 @@ if (behind > 0) syncBits.push(`↓${behind} behind`);
   <Label>status</Label>
   <Content>
     <Paragraph class="flex-wrap gap-0">
-      <span class="font-medium text-accent">⎇ {status.branch}</span>
+      <span class="font-medium text-accent mr-3">⎇ {status.branch}</span>
       · since {status.since} ·
       {syncBits.length > 0 && (
 				<>
-					<span class="text-fg">{syncBits.join(" · ")}</span>
+					<span class="text-fg ml-3">{syncBits.join(" · ")}</span>
 					<span class="text-border"> · </span>
 				</>
 			)}
