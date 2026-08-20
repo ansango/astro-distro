@@ -2,8 +2,8 @@ site:
   title: astro-distro
   description: Astro + Tailwind fastfetch-style portfolio template. TUI components, themeable systems, projects synced from GitHub via YAML.
   url: https://astro-distro.pages.dev
-  author: ansango
-  handle_suffix: dev
+  author: astro
+  handle_suffix: distro
   image: /og.png
   image_width: 1200
   image_height: 630
@@ -24,44 +24,44 @@ site:
 current: debian
 booted_at: '2026-08-20T10:00:00Z'
 host:
-  name: Gigabyte B660 DS3H DDR4
-  cpu: Intel i5 12th Gen
-  gpu: NVIDIA GTX 1060 6GB
-  memory: 16384MiB / 65536MiB
-  resolution: 3840x2400
+  name: devbox
+  cpu: AMD Ryzen 7 7700
+  gpu: AMD Radeon RX 7700 XT
+  memory: 32 GB DDR5
+  resolution: 2560x1440
 about:
   command: lazygit --view bio
   status:
     branch: main
-    since: 2019
-    ahead: 2
+    since: 2026
+    ahead: 1
     behind: 0
-    modified: 6
-    untracked: 1
+    modified: 2
+    untracked: 0
   bio:
     - icon: M
-      text: Senior software engineer — JS/TS, frontend, performance
+      text: Astro + Tailwind template for fastfetch-style portfolios
     - icon: M
-      text: Remote Tech Lead @ innusual — frontend and sometimes backend
+      text: Single source of truth — content in YAML, generated in JSON
     - icon: M
-      text: Typography, latency, good APIs. Details matter
+      text: 26 distro themes, switchable from the header with no flash
     - icon: M
-      text: Law @ USAL → pivoted to software out of curiosity
+      text: Projects synced from GitHub, cached locally for 1 hour
     - icon: M
-      text: Vinyl and analog/digital photography — always learning
+      text: SEO out of the box — OG, Twitter, JSON-LD, robots.txt
     - icon: M
-      text: Homelab on Proxmox + TrueNAS, Docker on top
+      text: TypeScript strict, biome, bun test, GitHub Actions
     - icon: ??
-      text: Migrating from Arch to Debian. The ansango syndrome
+      text: Fork this repo and edit data.yml to make it yours
   paths:
     - name: main
       current: true
-    - name: feature/astro
-    - name: feature/svelte
-    - name: feature/homelab
-    - name: feature/photography-migration
-    - name: feature/3d-printing
-    - name: feature/blog-cleanup
+    - name: feature/themes
+    - name: feature/seo
+    - name: feature/sync-script
+    - name: feature/yaml-config
+    - name: fix/components
+    - name: docs/readme
 uses:
   command: btop --view stack — daily usage && hardware
   cpu:
@@ -72,26 +72,18 @@ uses:
         detail: zed / vscode
       - label: terminal
         percent: 60
-        detail: GNOME Terminal + tmux
+        detail: alacritty + tmux
       - label: browser
         percent: 20
         detail: firefox / brave
       - label: notes
         percent: 10
         detail: obsidian
-        note: (live sync)
+        note: (markdown sync)
       - label: music
         percent: 10
         detail: navidrome
         note: (lastfm scrobbling)
-      - label: 3d printing
-        percent: 10
-        detail: bambulab A1
-        note: (orca)
-      - label: homelab
-        percent: 10
-        detail: Proxmox VE
-        note: (lxc containers)
       - label: theme
         percent: 50
         detail: tokyo night
@@ -99,21 +91,21 @@ uses:
         percent: 40
         detail: JetBrains Mono
   memory:
-    used: 8.2
-    total: 64
+    used: 16
+    total: 32
     theme: tokyo night
-    themePercent: 100
+    themePercent: 50
   hardware:
     label: hardware
-    device: Gigabyte B660M DS3H DDR4
-    ram: 64 GB DDR4
+    device: devbox
+    ram: 32 GB DDR5
     os: Debian 13 Trixie
   peripherals:
     label: peripherals
-    keyboard: Keychron K6 / Redragon K652
+    keyboard: Keychron K6
     mouse: Logitech G Pro
-    headphones: JBL 355BT
-    monitor: 2 x 27' LG 4K (27US500-W)
+    headphones: generic
+    monitor: 2 x 27" 1440p
 contact:
   command: mutt -f ansango@dev
   email: ansango@dev
@@ -135,15 +127,7 @@ contact:
     - key: q
       action: quit
 projects_ui:
-  command: ranger /home/ansango/projects
-  root: /home/ansango
+  command: ranger /home/astro/projects
+  root: /home/astro
 projects:
   - https://github.com/ansango/astro-distro
-  - https://github.com/ansango/lastfm-api
-  - https://github.com/ansango/lastfm-cli
-  - https://github.com/ansango/uziq
-  - https://github.com/ansango/anibalsantosgomez.film
-  - https://github.com/ansango/obsidian-blog  
-  - https://github.com/ansango/obsidian-metadata-links
-  - https://github.com/ansango/obsidian-slugify
-  - https://github.com/ansango/readme
