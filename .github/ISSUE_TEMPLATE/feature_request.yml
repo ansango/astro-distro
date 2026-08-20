@@ -1,0 +1,33 @@
+name: Feature Request
+description: Suggest a new feature for the template
+title: "[feat]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      content: |
+        Tell me what you'd like to see added or changed.
+  - type: textarea
+    attributes:
+      label: Problem
+      description: What are you trying to do / what's blocking you?
+      placeholder: I want to add a blog section but the current data shape doesn't support it.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed solution
+      description: How would you like it to work?
+      placeholder: A `posts:` key in `data.yml` with an array of frontmatter objects, plus a `src/pages/blog/` folder…
+  - type: textarea
+    attributes:
+      label: Alternatives
+      description: Other approaches you considered, if any.
+  - type: dropdown
+    attributes:
+      label: Scope
+      description: How big is the change?
+      options:
+        - Small (config / YAML only)
+        - Medium (new component or section)
+        - Large (new page, refactor)

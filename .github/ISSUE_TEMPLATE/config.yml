@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions / chat
+    url: https://github.com/ansango/astro-distro/discussions
+    about: Use GitHub Discussions for questions, ideas, or general feedback instead of opening an issue.
