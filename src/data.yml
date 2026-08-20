@@ -95,12 +95,13 @@ contact:
   command: mutt -f ansango@dev
   email: ansango@dev
   inbox:
-    - from: github.com
-      subject: /ansango
+    - from: github.com/ansango
       date: 15 Aug 2014
       href: https://github.com/ansango
+    - from: hola@ansango.com
+      date: 10 Jan 2019
+      href: mailto:hola@ansango.com
     - from: ansango.com
-      subject: hola@ansango.dev
       date: 10 Jan 2019
       href: https://ansango.com
   hints:
