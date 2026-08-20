@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-import { mkdirSync } from "node:fs";
 /**
  * One-off screenshot capture for the astro-distro template.
  *
@@ -12,26 +10,20 @@ import { mkdirSync } from "node:fs";
  * This file is intentionally NOT wired to package.json so it doesn't
  * add playwright as a project dep.
  */
+import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.SCREENSHOT_BASE ?? "http://127.0.0.1:4321";
 const THEMES = ["debian", "arch", "ubuntu", "kali"];
-const SECTIONS = [
-	{ id: "about", file: "lazygit" },
-	{ id: "projects", file: "ranger" },
-	{ id: "uses", file: "btop" },
-	{ id: "contact", file: "mutt" },
-];
 
 const OUT = "docs/screenshots";
 mkdirSync(`${OUT}/themes`, { recursive: true });
-mkdirSync(`${OUT}/components`, { recursive: true });
 
 const browser = await chromium.launch();
 
-// ── Theme screenshots (1280×800 viewport) ────────────────────────────
+// ── Theme screenshots (1280×1600 — captures fastfetch header + lazygit + start of projects) ──
 const themeCtx = await browser.newContext({
-	viewport: { width: 1280, height: 800 },
+	viewport: { width: 1280, height: 1600 },
 });
 for (const theme of THEMES) {
 	await themeCtx.addInitScript((t) => {
@@ -46,25 +38,6 @@ for (const theme of THEMES) {
 	console.log(`✓ ${path}`);
 }
 await themeCtx.close();
-
-// ── Component screenshots (default theme: debian) ───────────────────
-const compCtx = await browser.newContext({
-	viewport: { width: 1280, height: 800 },
-});
-await compCtx.addInitScript(() => {
-	localStorage.setItem("theme", "debian");
-});
-const compPage = await compCtx.newPage();
-await compPage.goto(BASE, { waitUntil: "networkidle" });
-await compPage.waitForTimeout(400);
-
-for (const { id, file } of SECTIONS) {
-	const section = compPage.locator(`#${id}`);
-	const path = `${OUT}/components/component-${file}.png`;
-	await section.screenshot({ path });
-	console.log(`✓ ${path}`);
-}
-await compCtx.close();
 
 // ── Featured (1200×630, debian theme, top of page) ──────────────────
 const featCtx = await browser.newContext({
